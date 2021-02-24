@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumiPet.Web", "SumiPet.Web\SumiPet.Web.csproj", "{66AC0A1D-9A44-485D-A95C-DB84FF603CBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66AC0A1D-9A44-485D-A95C-DB84FF603CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AC0A1D-9A44-485D-A95C-DB84FF603CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AC0A1D-9A44-485D-A95C-DB84FF603CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AC0A1D-9A44-485D-A95C-DB84FF603CBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7162C010-DAF9-46AC-9B62-3B58B631ABD6}
+	EndGlobalSection
+EndGlobal
