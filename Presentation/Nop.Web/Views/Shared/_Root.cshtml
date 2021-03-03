@@ -1,13 +1,48 @@
 ﻿@{
     Layout = "_Root.Head";
 }
+
 @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
+
+
 @await Html.PartialAsync("_Notifications")
+
 @await Html.PartialAsync("_JavaScriptDisabledWarning")
+
 @await Html.PartialAsync("_OldInternetExplorerWarning")
-<div class="master-wrapper-page">
-    @await Component.InvokeAsync("AdminHeaderLinks")
-    @await Html.PartialAsync("_Header")
+
+<div class="master-wrapper-page site-wrapper">
+    <!--Display admin link after log in-->
+    @*@await Component.InvokeAsync("AdminHeaderLinks")*@
+
+    @*@await Html.PartialAsync("_Header")*@
+
+    <header class="header petmark-header-3">
+        <div class="header-top text-white bg-primary">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <ul class="header-links no-border white-color justify-content-center justify-content-lg-start">
+                            <li><a href="cart.html"><i class="fas fa-car-alt"></i> Track Your Order</a></li>
+                            <li><a href="login-register.html"><i class="fas fa-user"></i> Register or Sign in</a></li>
+                            <li><a href="my-account.html"><i class="fas fa-user"></i> My Account</a></li>
+                        </ul>
+                    </div>
+                    @*<div class="col-lg-6 ">
+                        <div class="header-top-nav white-color right-nav justify-content-center justify-content-lg-end">
+                            <div class="nav-item">
+                                <a class="" href="login-register.html" role="button">Register or Sign in</a>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+
+
+    </header>
+
+
     <script asp-location="Footer">
         var localized_data = {
             AjaxCartFailure: "@T("AjaxCart.Failure")"
@@ -22,7 +57,7 @@
 
         @if (IsSectionDefined("Breadcrumb"))
         {
-            @RenderSection("Breadcrumb") 
+            @RenderSection("Breadcrumb")
         }
         <div class="master-column-wrapper">
             @RenderBody()
