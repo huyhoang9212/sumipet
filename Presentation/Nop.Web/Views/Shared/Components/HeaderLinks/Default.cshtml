@@ -15,31 +15,32 @@
                             @if (Model.IsAuthenticated)
                             {
                                 <div class="nav-item slide-down-wrapper">
-                                    <span>Welcome:</span><a class="slide-down--btn" href="@Url.RouteUrl("CustomerInfo")" role="button">
+                                    <span>Welcome:<span> </span></span>
+                                    <a class="slide-down--btn" href="@Url.RouteUrl("CustomerInfo")" role="button">
                                         @Model.CustomerName
                                     </a>
 
-                                </div>
+                            </div>
 
-                                <div class="nav-item slide-down-wrapper">
-                                    @*<a class="slide-down--btn" href="#" role="button">
-                                            Thoát<i class="ico-logout"></i>
-                                        </a>*@
+                            <div class="nav-item slide-down-wrapper">
+                                @*<a class="slide-down--btn" href="#" role="button">
+                                        Thoát<i class="ico-logout"></i>
+                                    </a>*@
 
-                                    <a href="@Url.RouteUrl("Logout")" class="ico-logout">Thoát</a>
-                                </div>
-                            }
-                            else
-                            {
-                                var returnUrl = Context.Request.Query.TryGetValue("returnUrl", out var url) && !StringValues.IsNullOrEmpty(url)
-                                              ? url.ToString()
-                                              : webHelper.GetRawUrl(Context.Request);
+                                <a href="@Url.RouteUrl("Logout")" class="ico-logout">Thoát</a>
+                            </div>
+                        }
+                        else
+                        {
+                            var returnUrl = Context.Request.Query.TryGetValue("returnUrl", out var url) && !StringValues.IsNullOrEmpty(url)
+                                          ? url.ToString()
+                                          : webHelper.GetRawUrl(Context.Request);
 
-                                <ul class="header-links">
-                                    <li><a href="@Url.RouteUrl("Register", new { returnUrl })"><i class="fas fa-user"></i> Đăng Ký</a></li>
-                                    <li><a href="@Url.RouteUrl("Login", new { returnUrl })"><i class="fas fa-user"></i> Đăng Nhập</a></li>
-                                </ul>
-                            }
+                            <ul class="header-links">
+                                <li><a href="@Url.RouteUrl("Register", new { returnUrl })"><i class="fas fa-user"></i> Đăng Ký</a></li>
+                                <li><a href="@Url.RouteUrl("Login", new { returnUrl })"><i class="fas fa-user"></i> Đăng Nhập</a></li>
+                            </ul>
+                        }
                         </div>
                     </div>
                 </div>
