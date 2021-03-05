@@ -10244,3 +10244,54 @@ a.gallary-item {
   color: #fff; }
 
 /*# sourceMappingURL=main.css.map */
+
+/* Sumi custom */
+.title-service {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.block-service {
+    padding: 20px 0px;
+}
+
+.title-service h2 {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+    .title-service h2 span {
+        display: inline-block;
+        position: relative;
+        /* font-family: 'helvet';*/
+        font-size: 20px;
+        color: #56a700;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+
+        .title-service h2 span:before {
+            height: 100%;
+            width: 280px;
+            position: absolute;
+            top: 0;
+            left: -285px;
+            content: '';
+            background: url(../image/services/before-title.png) no-repeat center right;
+        }
+
+        .title-service h2 span:after {
+            height: 100%;
+            width: 280px;
+            position: absolute;
+            top: 0;
+            right: -285px;
+            content: '';
+            background: url(../image/services/after-title.png) no-repeat center right;
+        }
+
+#block-service {
+    width: 1200px;
+    margin: auto;
+}

@@ -19,6 +19,10 @@
 
     @await Component.InvokeAsync("HeaderLinks")
 
+    @await Component.InvokeAsync("SumiSliders")
+
+
+
     <script asp-location="Footer">
         var localized_data = {
             AjaxCartFailure: "@T("AjaxCart.Failure")"
@@ -29,8 +33,8 @@
 
 
     @*<div class="header-menu">
-        @await Component.InvokeAsync("TopMenu")
-    </div>*@
+            @await Component.InvokeAsync("TopMenu")
+        </div>*@
 
 
 
