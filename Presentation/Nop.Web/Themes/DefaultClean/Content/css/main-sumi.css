@@ -107,7 +107,7 @@
 /*=== MEDIA QUERY ===*/
 /*=== MEDIA QUERY with max width===*/
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   color: #555555;
   font-size: 14px;
@@ -5675,7 +5675,7 @@ Category Navigation
   display: block;
   padding: 24px 25px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   color: #1a1f2b;
   text-transform: uppercase; }
 
