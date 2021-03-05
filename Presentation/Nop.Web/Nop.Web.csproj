@@ -44,6 +44,7 @@
 
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Content Remove="Themes\DefaultClean\Content\css\StyleSheet.css" />
     <Content Remove="Themes\DefaultClean\Content\fonts\Roboto-Black.ttf" />
     <Content Remove="Themes\DefaultClean\Content\fonts\Roboto-BlackItalic.ttf" />
     <Content Remove="Themes\DefaultClean\Content\fonts\Roboto-Bold.ttf" />
@@ -56,6 +57,8 @@
     <Content Remove="Themes\DefaultClean\Content\fonts\Roboto-Regular.ttf" />
     <Content Remove="Themes\DefaultClean\Content\fonts\Roboto-Thin.ttf" />
     <Content Remove="Themes\DefaultClean\Content\fonts\Roboto-ThinItalic.ttf" />
+    <Content Remove="Themes\DefaultClean\Content\image\services\after-title.png" />
+    <Content Remove="Themes\DefaultClean\Content\image\services\before-title.png" />
 
     <None Update="Areas\Admin\sitemap.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
