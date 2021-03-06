@@ -1,0 +1,117 @@
+﻿@model FooterModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@inject IWorkContext workContext;
+
+<section class="pt--50 space-db--30">
+    <h2 class="d-none">
+        Promotion Block
+    </h2>
+    <div class="container">
+        <div class="block-service">
+            <div class="title-service">
+                <img src="~/image/services/bg-title-dv.png" />
+                <h2><span>Dịch Vụ & Điều Trị</span></h2>
+            </div>
+        </div>
+
+        @*<div id="block-service">
+                <div class="items-servicenb  ">
+                    <div class="img-service"><a href="dich-vu/benh-dai-tren-cho.html"><img src="image/services/benhdaiocho-7724_245x245.jpg" alt="Bệnh dại trên chó"></a></div>
+                    <h3><a href="dich-vu/benh-dai-tren-cho.html">Bệnh dại trên chó</a></h3>
+                </div>
+                <div class="items-servicenb  ">
+                    <div class="img-service"><a href="dich-vu/triet-san-cho-meo.html"><img src="image/services/trietsanchomeotaisaigon-3565_245x245.jpg" alt="Triệt sản chó mèo"></a></div>
+                    <h3><a href="dich-vu/triet-san-cho-meo.html">Triệt sản chó mèo</a></h3>
+                </div>
+                <div class="items-servicenb  ">
+                    <div class="img-service"><a href="dich-vu/benh-care-o-cho.html"><img src="image/services/benhcareocho-8313_245x245.jpg" alt="Bệnh care ở chó"></a></div>
+                    <h3><a href="dich-vu/benh-care-o-cho.html">Bệnh care ở chó</a></h3>
+                </div>
+                <div class="items-servicenb  margin-right">
+                    <div class="img-service"><a href="dich-vu/cac-benh-sieu-vi-tren-meo.html"><img src="image/services/cacbenhsieuviomeo-5003_245x245.jpg" alt="Các bệnh siêu vi trên mèo"></a></div>
+                    <h3><a href="dich-vu/cac-benh-sieu-vi-tren-meo.html">Các bệnh siêu vi trên mèo</a></h3>
+                </div>
+                <div class="items-servicenb  ">
+                    <div class="img-service"><a href="dich-vu/trung-tam-xet-nghiem-cho-meo.html"><img src="image/services/trungtamxetnghiemchomeo-837_245x245.jpg" alt="Trung tâm xét nghiệm chó mèo"></a></div>
+                    <h3><a href="dich-vu/trung-tam-xet-nghiem-cho-meo.html">Trung tâm xét nghiệm chó mèo</a></h3>
+                </div>
+                <div class="items-servicenb  ">
+                    <div class="img-service"><a href="dich-vu/trung-tam-tu-van-thu-y-truc-tuyen.html"><img src="image/services/ppp-5328_245x245.jpg" alt="trung tâm tư vấn thú y trực tuyến"></a></div>
+                    <h3><a href="dich-vu/trung-tam-tu-van-thu-y-truc-tuyen.html">trung tâm tư vấn thú y trực tuyến</a></h3>
+                </div>
+                <div class="items-servicenb  ">
+                    <div class="img-service"><a href="dich-vu/cach-nhan-biet-benh-parvo-o-cho.html"><img src="image/services/benhparvoocho-966_245x245.jpg" alt="Cách Nhận biết Bệnh Parvo ở Chó"></a></div>
+                    <h3><a href="dich-vu/cach-nhan-biet-benh-parvo-o-cho.html">Cách Nhận biết Bệnh Parvo ở Chó</a></h3>
+                </div>
+                <div class="items-servicenb  margin-right">
+                    <div class="img-service"><a href="dich-vu/dich-vu-cham-soc-thu-cung-phong-kham-thu-y-sai-gon.html"><img src="image/services/43-1071_245x245.jpg" alt="dịch vụ chăm sóc thú cưng | Phòng Khám Thú Y Sài Gòn"></a></div>
+                    <h3><a href="dich-vu/dich-vu-cham-soc-thu-cung-phong-kham-thu-y-sai-gon.html">dịch vụ chăm sóc thú cưng | Phòng Khám Thú Y Sài Gòn</a></h3>
+                </div>
+                <div class="clear"></div>
+            </div>*@
+
+        <div class="row">
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/kham-va-dieu-tri-benh.png" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Khám và xét nghiệm</a>
+
+            </div>
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/tiem_phong.png" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Tiêm Phòng</a>
+
+            </div>
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/diet_ve_bo_chet.png" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Diệt ve bọ chét</a>
+
+            </div>
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/tham_my.png" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Dịch vụ thẩm mỹ</a>
+
+            </div>
+        </div>
+
+        @*<div class="row">
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/benhdaiocho-7724_245x245.jpg" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Bệnh dại trên chó</a>
+
+            </div>
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/benhcareocho-8313_245x245.jpg" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Bệnh dại trên chó</a>
+
+            </div>
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/cacbenhsieuviomeo-5003_245x245.jpg" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Bệnh dại trên chó</a>
+
+            </div>
+            <div class="col-md-3 sumi-service">
+                <a class=" overflow-image img-service">
+                    <img src="image/services/cacbenhsieuviomeo-5003_245x245.jpg" alt="">
+                </a>
+                <a href="dich-vu/benh-dai-tren-cho.html" class="sumi-service-title">Bệnh dại trên chó</a>
+
+            </div>
+        </div>*@
+
+    </div>
+</section>
