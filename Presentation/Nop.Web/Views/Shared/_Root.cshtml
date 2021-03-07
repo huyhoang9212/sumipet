@@ -19,9 +19,9 @@
 
     @await Component.InvokeAsync("HeaderLinks")
 
-    @await Component.InvokeAsync("SumiSliders")
+    @*@await Component.InvokeAsync("SumiSliders")
 
-    @await Component.InvokeAsync("SumiServices")
+    @await Component.InvokeAsync("SumiServices")*@
 
 
     <script asp-location="Footer">
@@ -41,6 +41,8 @@
 
 
     <div class="master-wrapper-content">
+
+
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentBefore })
 
         @if (IsSectionDefined("Breadcrumb"))
@@ -48,9 +50,14 @@
             @RenderSection("Breadcrumb")
         }
         <div class="master-column-wrapper">
+
             @RenderBody()
+
+
         </div>
+
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentAfter })
+
     </div>
 
 

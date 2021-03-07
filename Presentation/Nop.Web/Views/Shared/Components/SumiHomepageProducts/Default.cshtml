@@ -1,0 +1,399 @@
+﻿@model IList<SumiHomePageProductViewModel>
+<!-- Home 2 => Slider bLock 2 -->
+@foreach (var item in Model)
+{
+<div class="pt--50">
+    <div class="container">
+
+        <div class="block-title-2">
+            <h2>@item.Category.Name</h2>
+        </div>
+        <div class="petmark-slick-slider petmark-slick-slider--wrapper-2 border grid-column-slider " data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 3000,
+                "slidesToShow": 5,
+                "rows" :2,
+                "arrows": true
+            }'
+             data-slick-responsive='[
+                {"breakpoint":991, "settings": {"slidesToShow": 3} },
+                {"breakpoint":768, "settings": {"slidesToShow": 2} },
+                {"breakpoint":480, "settings": {"slidesToShow": 1,"rows" :1} }
+            ]'>
+
+            @foreach (var product in item.Products)
+            {
+                <div class="single-slide">
+                    <div class="pm-product">
+                        <div class="image">
+
+                            <a href="@Url.RouteUrl("Product", new { SeName = product.SeName})" title="@product.DefaultPictureModel.Title">
+                                <img src="@product.DefaultPictureModel.ImageUrl" alt="@product.DefaultPictureModel.AlternateText" title="@product.DefaultPictureModel.Title">
+                            </a>
+       
+
+                            @*<div class="hover-conents">
+                                <ul class="product-btns">
+                                    <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                    <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                                </ul>
+                            </div>*@
+
+                            @if (!string.IsNullOrEmpty(product.ProductPrice.OldPrice))
+                            {
+                                <span class="onsale-badge">Sale!</span>
+                            }
+
+                            @*<span class="onsale-badge">Sale!</span>*@
+                        </div>
+                        <div class="content">
+                            <h3>@product.Name</h3>
+                            <div class="price text-orange">
+                                @if (!string.IsNullOrEmpty(product.ProductPrice.OldPrice))
+                                {
+                                    <span class="old">@product.ProductPrice.OldPrice</span>
+                                }
+
+                                <span>@product.ProductPrice.Price</span>
+                            </div>
+                            <div class="btn-block">
+                                <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+</div>
+}
+
+<div class="pt--50">
+    <div class="container">
+
+        <div class="block-title-2">
+            <h2>NEW PRODUCTS</h2>
+        </div>
+        <div class="petmark-slick-slider petmark-slick-slider--wrapper-2 border grid-column-slider " data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 3000,
+                "slidesToShow": 5,
+                "rows" :2,
+                "arrows": true
+            }'
+             data-slick-responsive='[
+                {"breakpoint":991, "settings": {"slidesToShow": 3} },
+                {"breakpoint":768, "settings": {"slidesToShow": 2} },
+                {"breakpoint":480, "settings": {"slidesToShow": 1,"rows" :1} }
+            ]'>
+
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-1.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-2.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-3.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-4.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-5.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-6.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-11.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-8.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-6.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-7.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-2.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="pm-product">
+                    <div class="image">
+                        <a href="product-details.html"><img src="image/product/home-2/product-2.jpg" alt=""></a>
+                        <div class="hover-conents">
+                            <ul class="product-btns">
+                                <li><a href="wishlist.html"><i class="ion-ios-heart-outline"></i></a></li>
+                                <li><a href="compare.html"><i class="ion-ios-shuffle"></i></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#quickModal"><i class="ion-ios-search"></i></a></li>
+                            </ul>
+                        </div>
+                        <span class="onsale-badge">Sale!</span>
+                    </div>
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="price text-orange">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                        <div class="btn-block">
+                            <a href="cart.html" class="btn btn-outlined btn-rounded">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

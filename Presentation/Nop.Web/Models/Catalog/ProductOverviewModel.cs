@@ -6,6 +6,18 @@ using Nop.Web.Models.Media;
 
 namespace Nop.Web.Models.Catalog
 {
+    public partial class SumiHomePageProductViewModel
+    {
+        public CategoryModel Category { get; set; }
+
+        public List<ProductOverviewModel> Products { get; set; }
+        public SumiHomePageProductViewModel()
+        {
+            Products = new List<ProductOverviewModel>();
+        }
+    }
+
+
     public partial class ProductOverviewModel : BaseNopEntityModel
     {
         public ProductOverviewModel()
@@ -16,6 +28,8 @@ namespace Nop.Web.Models.Catalog
             ReviewOverviewModel = new ProductReviewOverviewModel();
         }
 
+        public int DisplayOrder { get; set; }
+        public bool ShowOnHomepage { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }

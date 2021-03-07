@@ -1106,7 +1106,9 @@ namespace Nop.Web.Factories
                     ProductType = product.ProductType,
                     MarkAsNew = product.MarkAsNew &&
                         (!product.MarkAsNewStartDateTimeUtc.HasValue || product.MarkAsNewStartDateTimeUtc.Value < DateTime.UtcNow) &&
-                        (!product.MarkAsNewEndDateTimeUtc.HasValue || product.MarkAsNewEndDateTimeUtc.Value > DateTime.UtcNow)
+                        (!product.MarkAsNewEndDateTimeUtc.HasValue || product.MarkAsNewEndDateTimeUtc.Value > DateTime.UtcNow),
+                    DisplayOrder = product.DisplayOrder,
+                    ShowOnHomepage = product.ShowOnHomepage
                 };
 
                 //price

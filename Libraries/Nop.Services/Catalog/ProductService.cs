@@ -358,6 +358,7 @@ namespace Nop.Services.Catalog
                         where p.Published &&
                         !p.Deleted &&
                         p.ShowOnHomepage
+                       
                         select p;
 
             var products = query.ToCachedList(_cacheKeyService.PrepareKeyForDefaultCache(NopCatalogDefaults.ProductsAllDisplayedOnHomepageCacheKey));
