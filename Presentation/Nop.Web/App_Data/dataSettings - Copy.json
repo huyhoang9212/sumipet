@@ -1,0 +1,5 @@
+﻿{
+  "DataConnectionString": "Data Source=103.74.123.8;Initial Catalog=qsabmcoq_sumipet;Integrated Security=False;Persist Security Info=False;User ID=\"qsabmcoq_sumipet \";Password=P@ssw0rd",
+  "DataProvider": "sqlserver",
+  "RawDataSettings": {}
+}

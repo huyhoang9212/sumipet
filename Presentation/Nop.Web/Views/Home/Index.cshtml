@@ -16,8 +16,8 @@
 
         @await Component.InvokeAsync("SumiHomepageProducts")
 
-        @await Component.InvokeAsync("HomepageCategories")
-        @await Component.InvokeAsync("HomepageProducts")
+        @*@await Component.InvokeAsync("HomepageCategories")
+        @await Component.InvokeAsync("HomepageProducts")*@
 
         @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomepageTop })*@
 
@@ -38,11 +38,15 @@
 
         @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomepageBeforeNews })*@
 
-        @*@await Component.InvokeAsync("HomepageNews")*@
+
+        @await Component.InvokeAsync("SumiHomepageNews")
+
+
+        @await Component.InvokeAsync("HomepageNews")
 
         @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomepageBeforePoll })*@
 
-        @await Component.InvokeAsync("HomepagePolls")
+        @*@await Component.InvokeAsync("HomepagePolls")*@
 
         @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomepageBottom })*@
 

@@ -20,6 +20,11 @@ namespace Nop.Core.Domain.News
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets the picture identifier
+        /// </summary>
+        public int? PictureId { get; set; }
+
+        /// <summary>
         /// Gets or sets the short text
         /// </summary>
         public string Short { get; set; }

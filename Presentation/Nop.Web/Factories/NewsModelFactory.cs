@@ -14,6 +14,7 @@ using Nop.Services.Media;
 using Nop.Services.News;
 using Nop.Services.Seo;
 using Nop.Web.Infrastructure.Cache;
+using Nop.Web.Models.Media;
 using Nop.Web.Models.News;
 
 namespace Nop.Web.Factories
@@ -141,7 +142,7 @@ namespace Nop.Web.Factories
 
             //number of news comments
             var storeId = _newsSettings.ShowNewsCommentsPerStore ? _storeContext.CurrentStore.Id : 0;
-            
+
             model.NumberOfComments = _newsService.GetNewsCommentsCount(newsItem, storeId, true);
 
             if (prepareComments)
@@ -157,6 +158,23 @@ namespace Nop.Web.Factories
                     model.Comments.Add(commentModel);
                 }
             }
+
+            if (newsItem.PictureId.HasValue)
+            {
+                var pictureSize = _mediaSettings.CategoryThumbPictureSize;
+
+                var picture = _pictureService.GetPictureById(newsItem.PictureId.Value);
+                var pictureModel = new PictureModel
+                {
+                    FullSizeImageUrl = _pictureService.GetPictureUrl(ref picture),
+                    ImageUrl = _pictureService.GetPictureUrl(ref picture, pictureSize),
+                    Title = newsItem.Title,
+                    AlternateText = newsItem.MetaTitle
+                };
+
+                model.PictureModel = pictureModel;
+            }
+
 
             return model;
         }
