@@ -1,10 +1,11 @@
 ﻿@using Nop.Services.Plugins
 @using Nop.Services.Security
 @using Nop.Web.Framework.Menu
+@using Nop.Core.Configuration
 @inject IPermissionService permissionService
 @inject IPluginManager<IAdminMenuPlugin> adminMenuPluginManager
 @inject IWorkContext workContext
-
+@inject NopConfig config
 <ul class="sidebar-menu" data-widget="tree">
     @{
         //load sitemap
@@ -28,6 +29,8 @@
             var hasManagePluginsPermission = permissionService.Authorize(StandardPermissionProvider.ManagePlugins);
             pluginNode.Visible = hasManagePluginsPermission && pluginNode.ChildNodes.Any(x => x.Visible);
         }
+
+        var isAdminPage = config.UseRedisToStoreDataProtectionKeys;
 
         //display menu items
         foreach (var item in rootNode.ChildNodes.Where(x => x.Visible))
