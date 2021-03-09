@@ -28,6 +28,9 @@ namespace Nop.Web.Models.News
         public IList<NewsCommentModel> Comments { get; set; }
         public AddNewsCommentModel AddNewComment { get; set; }
 
+        public int DisplayOrder { get; set; }
+        public bool ShowOnHomePage { get; set; }
+
         public int? PictureId { get; set; }
         public PictureModel PictureModel { get; set; }
 

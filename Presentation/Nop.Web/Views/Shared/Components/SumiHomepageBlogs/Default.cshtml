@@ -1,0 +1,53 @@
+﻿@model HomepageBlogItemsModel
+
+
+<div class="pt--50">
+    <div class="container">
+        <div class="block-title">
+            <h2>Bài viết</h2>
+        </div>
+
+
+        <div class="border normal-slider  blog-slider">
+            <div class="row">
+                @foreach (var item in Model.BlogItems)
+                {
+                    <div class="col-xl-3 col-md-6 mb--30">
+                        <div class="blog-post">
+                            <a href="@Url.RouteUrl("BlogPost", new {SeName = item.SeName})" class="blog-image">
+                                <img src="@item.PictureModel.ImageUrl" alt="@item.Title">
+                            </a>
+                            <div class="blog-content mt--15 text-center">
+                                <header>
+                                    <h3 class="blog-title"> <a href="@Url.RouteUrl("BlogPost", new {SeName = item.SeName})">@item.Title</a></h3>
+                                    <div class="post-meta">
+                                        <span class="post-author">
+                                            <i class="fas fa-user"></i>
+                                            <span class="text-gray">Đăng bởi : </span>
+                                            admin
+                                        </span>
+                                    </div>
+
+                                </header>
+                                <article>
+                                    <h3 class="d-none sr-only">blob-article</h3>
+                                    <p>
+                                        @Html.Raw(item.BodyOverview)
+                                    </p>
+                                </article>
+                                <div class="blog-btn pb--10 pt--10">
+                                    <a href="@Url.RouteUrl("BlogPost", new {SeName = item.SeName})" class="btn btn-rounded btn-outlined--primary">Đọc thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

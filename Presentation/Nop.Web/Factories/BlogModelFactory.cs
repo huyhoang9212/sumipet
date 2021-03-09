@@ -16,6 +16,7 @@ using Nop.Services.Media;
 using Nop.Services.Seo;
 using Nop.Web.Infrastructure.Cache;
 using Nop.Web.Models.Blogs;
+using Nop.Web.Models.Media;
 
 namespace Nop.Web.Factories
 {
@@ -138,16 +139,19 @@ namespace Nop.Web.Factories
             model.CreatedOn = _dateTimeHelper.ConvertToUserTime(blogPost.StartDateUtc ?? blogPost.CreatedOnUtc, DateTimeKind.Utc);
             model.Tags = _blogService.ParseTags(blogPost);
             model.AddNewComment.DisplayCaptcha = _captchaSettings.Enabled && _captchaSettings.ShowOnBlogCommentPage;
+            model.PictureId = blogPost.PictureId;
+            model.DisplayOrder = blogPost.DisplayOrder;
+            model.ShowOnHomePage = blogPost.ShowOnHomePage;
 
             //number of blog comments
             var storeId = _blogSettings.ShowBlogCommentsPerStore ? _storeContext.CurrentStore.Id : 0;
-            
+
             model.NumberOfComments = _blogService.GetBlogCommentsCount(blogPost, storeId, true);
 
             if (prepareComments)
-            {                
+            {
                 var blogComments = _blogService.GetAllComments(
-                    blogPostId: blogPost.Id, 
+                    blogPostId: blogPost.Id,
                     approved: true,
                     storeId: storeId);
 
@@ -157,6 +161,39 @@ namespace Nop.Web.Factories
                     model.Comments.Add(commentModel);
                 }
             }
+
+            if (blogPost.PictureId.HasValue)
+            {
+                var pictureSize = _mediaSettings.CategoryThumbPictureSize;
+
+                var picture = _pictureService.GetPictureById(blogPost.PictureId.Value);
+                var pictureModel = new PictureModel
+                {
+                    FullSizeImageUrl = _pictureService.GetPictureUrl(ref picture),
+                    ImageUrl = _pictureService.GetPictureUrl(ref picture, pictureSize),
+                    Title = blogPost.Title,
+                    AlternateText = blogPost.MetaTitle
+                };
+
+                model.PictureModel = pictureModel;
+            }
+
+        }
+
+        public virtual HomepageBlogItemsModel PrepareHomepageBlogItemsModel()
+        {
+            var blogPosts = _blogService.GetAllBlogPosts(_storeContext.CurrentStore.Id,
+                  _workContext.WorkingLanguage.Id);
+
+            var blogModel = new HomepageBlogItemsModel();
+            blogModel.BlogItems = blogPosts.Where(x => x.ShowOnHomePage).Select(x =>
+              {
+                  var blogPostModel = new BlogPostModel();
+                  PrepareBlogPostModel(blogPostModel, x, false);
+                  return blogPostModel;
+              }).OrderBy(x => x.DisplayOrder).ToList();
+
+            return blogModel;
         }
 
         /// <summary>

@@ -31,6 +31,7 @@
     </div>
 
 }
+
 @if (Model.NewsItems.Count > 0)
 {
     <div class="pt--50">
@@ -56,33 +57,29 @@
                         <div class="blog-post card-style-list--2">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a href="blog-details.html" class="image overflow-image">
-                                        <img src="@item.PictureModel.ImageUrl   " alt="">
+                                    <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })" class="image overflow-image">
+                                        <img src="@item.PictureModel.ImageUrl" alt="">
                                     </a>
                                 </div>
                                 <div class="col-lg-6 mt-4 mt-lg-0">
                                     <div class="blog-content">
                                         <header class="mb-0">
                                             <h2 class="blog-date">
-                                                @{ 
-                                                    //string monthName = item.CreatedOn .ToString("MMM", System. CultureInfo.InvariantCulture);
-                                                }
                                                 <span class="day">@item.CreatedOn.Day </span><span class="month"> @item.CreatedOn.ToString("MMM") </span><span class="year">
                                                     @item.CreatedOn.Year
                                                 </span>
                                             </h2>
-                                            <h3 class="blog-title">@item.Title</h3>
+                                            <h3 class="blog-title"><a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })">@item.Title</a></h3>
                                         </header>
                                         <div>
                                             <p>
-                                                @item.Short
+                                                @Html.Raw(item.Short)
                                             </p>
                                         </div>
                                         <footer class="blog-post-footer mt-0">
-                                            <div class="blog-btn">
-                                                <a href="blog-details.html">Read More</a>
+                                            <div class="blog-btn pb--10 pt--10">
+                                                <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })" class="btn btn-rounded btn-outlined--primary">Chi tiết</a>
                                             </div>
-
                                         </footer>
                                     </div>
                                 </div>
@@ -90,47 +87,10 @@
                         </div>
                     </div>
                 }
-
-
-                @*<div class="single-slide">
-                        <div class="blog-post card-style-list--2">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <a href="blog-details.html" class="image overflow-image">
-                                        <img src="image/others/home-blog-2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 mt-4 mt-lg-0">
-                                    <div class="blog-content">
-                                        <header class="mb-0">
-                                            <h2 class="blog-date">
-                                                <span class="day">01 </span><span class="month"> Dec </span><span class="year">
-                                                    14
-                                                </span>
-                                            </h2>
-                                            <h3 class="blog-title">Blog Image Post</h3>
-                                        </header>
-                                        <div>
-                                            <p>
-                                                Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue
-                                                condimentum
-                                                rhoncus. Praesent
-                                            </p>
-                                        </div>
-                                        <footer class="blog-post-footer mt-0">
-                                            <div class="blog-btn">
-                                                <a href="blog-details.html">Read More</a>
-                                            </div>
-
-                                        </footer>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
             </div>
         </div>
     </div>
 }
+
 
 

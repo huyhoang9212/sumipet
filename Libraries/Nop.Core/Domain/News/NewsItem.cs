@@ -24,6 +24,11 @@ namespace Nop.Core.Domain.News
         /// </summary>
         public int? PictureId { get; set; }
 
+        public int DisplayOrder { get; set; }
+
+        public bool ShowOnHomePage { get; set; }
+
+
         /// <summary>
         /// Gets or sets the short text
         /// </summary>

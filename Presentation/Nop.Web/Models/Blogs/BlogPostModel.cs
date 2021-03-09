@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nop.Web.Framework.Models;
+using Nop.Web.Models.Media;
 
 namespace Nop.Web.Models.Blogs
 {
@@ -29,5 +30,17 @@ namespace Nop.Web.Models.Blogs
 
         public IList<BlogCommentModel> Comments { get; set; }
         public AddBlogCommentModel AddNewComment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the picture identifier
+        /// </summary>
+        public int? PictureId { get; set; }
+
+        public int DisplayOrder { get; set; }
+
+        public bool ShowOnHomePage { get; set; }
+
+        public PictureModel PictureModel { get; set; }
+
     }
 }

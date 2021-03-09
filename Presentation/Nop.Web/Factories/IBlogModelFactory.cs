@@ -9,6 +9,9 @@ namespace Nop.Web.Factories
     /// </summary>
     public partial interface IBlogModelFactory
     {
+
+        HomepageBlogItemsModel PrepareHomepageBlogItemsModel();
+
         /// <summary>
         /// Prepare blog comment model
         /// </summary>

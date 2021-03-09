@@ -139,6 +139,9 @@ namespace Nop.Web.Factories
             model.AllowComments = newsItem.AllowComments;
             model.CreatedOn = _dateTimeHelper.ConvertToUserTime(newsItem.StartDateUtc ?? newsItem.CreatedOnUtc, DateTimeKind.Utc);
             model.AddNewComment.DisplayCaptcha = _captchaSettings.Enabled && _captchaSettings.ShowOnNewsCommentPage;
+            model.PictureId = newsItem.PictureId;
+            model.DisplayOrder = newsItem.DisplayOrder;
+            model.ShowOnHomePage = newsItem.ShowOnHomePage;
 
             //number of news comments
             var storeId = _newsSettings.ShowNewsCommentsPerStore ? _storeContext.CurrentStore.Id : 0;
@@ -192,13 +195,13 @@ namespace Nop.Web.Factories
                 return new HomepageNewsItemsModel
                 {
                     WorkingLanguageId = _workContext.WorkingLanguage.Id,
-                    NewsItems = newsItems
+                    NewsItems = newsItems.Where(x => x.ShowOnHomePage)
                         .Select(x =>
                         {
                             var newsModel = new NewsItemModel();
                             PrepareNewsItemModel(newsModel, x, false);
                             return newsModel;
-                        }).ToList()
+                        }).OrderBy(x => x.DisplayOrder).ToList()
                 };
             });
 
