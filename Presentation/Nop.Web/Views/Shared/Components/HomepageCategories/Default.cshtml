@@ -1,4 +1,16 @@
-﻿@model IList<CategoryModel>
+﻿@using Nop.Core
+@using Nop.Services.Helpers
+@using Nop.Web.Framework.UI
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@inject IUserAgentHelper userAgentHelper
+
+@model IList<CategoryModel>
+@{
+    var themeName = themeContext.WorkingThemeName;
+    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/styles.css");
+}
+
 @if (Model.Count > 0)
 {
     <div class="category-grid home-page-category-grid">
