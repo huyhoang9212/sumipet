@@ -1,0 +1,101 @@
+﻿@model NewsItemListModel
+@{
+    //Layout = "_SumiColumnsTwo";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.NewsArchive").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-news-list-page");
+}
+
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.RouteUrl("Homepage")" title="Trang chủ">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Tin tức mới nhất</li>
+        </ol>
+    </div>
+</nav>
+
+
+<main class="blog-page-section with-sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-9 order-lg-2  left-slide-margin">
+
+                <div class="blog-posts-container">
+                    <!-- Blog Image Post -->
+                    @foreach (var item in Model.NewsItems)
+                    {
+                        <div class="blog-post blog-style-list">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-6">
+                                    <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })" class="blog-image">
+                                        <img src="@item.PictureModel.ImageUrl" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="blog-content mt--15 mt-md-0">
+                                        <header>
+                                            @*<div class="post-category text-primary">
+                                                <i class="fas fa-folder"></i>
+                                                <a href="#">Wordpress</a>,
+                                                <a href="#">Fasion</a>
+                                            </div>*@
+                                            <h3 class="blog-title"> <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })">@item.Title</a></h3>
+                                            <div class="post-meta">
+                                                <span class="post-author">
+                                                    <i class="fas fa-user"></i>
+                                                    <span class="text-gray">Posted by : </span>
+                                                    admin
+                                                </span>
+                                                <span class="post-separator">|</span>
+                                                <span class="post-date">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                    <span class="text-gray">On : </span>
+                                                    @item.CreatedOn.ToShortDateString()
+                                                </span>
+                                            </div>
+                                        </header>
+                                        <article>
+                                            <h3 class="d-none sr-only">blog-article</h3>
+                                            <p>
+                                               @Html.Raw(item.Short)
+                                            </p>
+                                        </article>
+                                        <footer class="blog-post-footer">
+                                            <div class="blog-btn">
+                                                <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })" class="btn btn-rounded btn-outlined--primary">Chi Tiết</a>
+                                            </div>
+                                            <div class="social-links">
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-facebook-f"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-twitter"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-pinterest-p"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-google-plus-g"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-linkedin-in"></i></a>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+
+
+            </div>
+
+            @await Component.InvokeAsync("SumiCategoryNavigation")
+
+        </div>
+    </div>
+</main>
+
+

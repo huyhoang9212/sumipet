@@ -88,13 +88,24 @@ namespace Nop.Web.Controllers
 
         #region Methods
 
-        public virtual IActionResult List(NewsPagingFilteringModel command)
+        public virtual IActionResult List2(NewsPagingFilteringModel command)
         {
             if (!_newsSettings.Enabled)
                 return RedirectToRoute("Homepage");
 
             var model = _newsModelFactory.PrepareNewsItemListModel(command);
             return View(model);
+            //return View("SumiList")
+        }
+
+        public virtual IActionResult List(NewsPagingFilteringModel command)
+        {
+            if (!_newsSettings.Enabled)
+                return RedirectToRoute("Homepage");
+
+            var model = _newsModelFactory.PrepareNewsItemListModel(command);
+            //return View(model);
+            return View("SumiList", model);
         }
 
         public virtual IActionResult ListRss(int languageId)
