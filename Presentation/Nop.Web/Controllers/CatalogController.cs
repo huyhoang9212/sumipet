@@ -129,7 +129,9 @@ namespace Nop.Web.Controllers
 
             //template
             var templateViewPath = _catalogModelFactory.PrepareCategoryTemplateViewPath(category.CategoryTemplateId);
-            return View(templateViewPath, model);
+
+            //return View(templateViewPath, model);
+            return View("SumiProductByCategory", model);
         }
 
         [HttpPost]

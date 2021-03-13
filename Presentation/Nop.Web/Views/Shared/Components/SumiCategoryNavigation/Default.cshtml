@@ -1,0 +1,148 @@
+﻿@model CategoryNavigationModel
+@if (Model.Categories.Count > 0)
+{
+    @if (1 == 2)
+    {
+        <div class="block block-category-navigation">
+            <div class="title">
+                <strong>@T("Categories")</strong>
+            </div>
+            <div class="listbox">
+                <ul class="list">
+                    @foreach (var category in Model.Categories)
+                    {
+                        var categoryLineModel = new CategoryNavigationModel.CategoryLineModel
+                        {
+                            CurrentCategoryId = Model.CurrentCategoryId,
+                            Category = category
+                        };
+                        @await Html.PartialAsync("_CategoryLine.Navigation", categoryLineModel)
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+    <div class="col-lg-4 col-xl-3 order-lg-1">
+        <div class="sidebar-widget">
+            <div class="single-sidebar">
+                <h2 class="sidebar-title">DANH MỤC</h2>
+                <ul class="sidebar-filter-list">
+                    @foreach (var category in Model.Categories)
+                    {
+                        var active = Model.CurrentCategoryId == category.Id;
+                        var liClass = active ? "active" : "inactive";
+
+                        var categoryLineModel = new CategoryNavigationModel.CategoryLineModel
+                        {
+                            CurrentCategoryId = Model.CurrentCategoryId,
+                            Category = category
+                        };
+
+                        <li class="@liClass"><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></li>
+                    }
+
+                    @*<li><a href="#" data-count="(5)">Accessories</a></li>
+                    <li><a href="#" data-count="(13)">Bedroom</a></li>
+                    <li><a href="#" data-count="(13)">Decor & Furniture</a></li>
+                    <li><a href="#" data-count="(12)">Electronics & Computer</a></li>
+                    <li><a href="#" data-count="(4)">Fashion & clothings</a></li>
+                    <li><a href="#" data-count="(14)">Furniture</a></li>
+                    <li><a href="#" data-count="(7)">Home, Garden & Tools</a></li>
+                    <li><a href="#" data-count="(4)">Laptops & Desktops</a></li>
+                    <li><a href="#" data-count="(3)">Livingroom</a></li>
+                    <li><a href="#" data-count="(6)">Men</a></li>
+                    <li><a href="#" data-count="(7)">Mobiles & Tablets</a></li>
+                    <li><a href="#" data-count="(7)">Sport & Outdoors</a></li>
+                    <li><a href="#" data-count="(0)">Toy, Kids & Baby</a></li>
+                    <li><a href="#" data-count="(9)">Uncategorized</a></li>
+                    <li><a href="#" data-count="(4)">Women</a></li>*@
+                </ul>
+            </div>
+            @*<div class="single-sidebar">
+                <h2 class="sidebar-title">Color</h2>
+                <ul class="sidebar-filter-list">
+                    <li><a href="#" data-count="(4)">Gold</a></li>
+
+                </ul>
+            </div>
+            <div class="single-sidebar">
+                <h2 class="sidebar-title">FILTER BY PRICE</h2>
+                <div class="range-slider pt--10">
+                    <div class="pm-range-slider"></div>
+                    <div class="slider-price">
+                        <p>
+                            <input type="text" id="amount" readonly>
+                            <a href="#" class="btn btn--primary">Filter</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-sidebar">
+                <h2 class="sidebar-title">FILTER BY PRICE</h2>
+                <a href="product-details.html" class="sidebar-product pm-product product-type-list">
+                    <div class="image">
+                        <img src="image/product/home-1/product-7.jpg" alt="">
+                    </div>
+
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="rating-widget">
+                            <span class="single-rating"><i class="fas fa-star"></i></span>
+                            <span class="single-rating"><i class="fas fa-star"></i></span>
+                            <span class="single-rating"><i class="fas fa-star"></i></span>
+                            <span class="single-rating"><i class="fas fa-star-half-alt"></i></span>
+                            <span class="single-rating"><i class="far fa-star"></i></span>
+                        </div>
+                        <div class="price text-red">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="product-details.html" class="sidebar-product pm-product product-type-list">
+                    <div class="image">
+                        <img src="image/product/home-1/product-7.jpg" alt="">
+                    </div>
+
+                    <div class="content">
+                        <h3>Convallis quam sit</h3>
+                        <div class="rating-widget">
+                            <span class="single-rating"><i class="fas fa-star"></i></span>
+                            <span class="single-rating"><i class="fas fa-star"></i></span>
+                            <span class="single-rating"><i class="fas fa-star"></i></span>
+                            <span class="single-rating"><i class="fas fa-star-half-alt"></i></span>
+                            <span class="single-rating"><i class="far fa-star"></i></span>
+                        </div>
+                        <div class="price text-red">
+                            <span class="old">$200</span>
+                            <span>$300</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="single-sidebar">
+                <h2 class="sidebar-title">TAGS</h2>
+                <ul class="sidebar-tag-list">
+                    <li><a href="#"> Chilled</a></li>
+                    <li><a href="#">Dark</a></li>
+                    <li> <a href="#">Euro</a></li>
+                    <li><a href="#">Fashion</a></li>
+                    <li><a href="#">Food</a></li>
+                    <li><a href="#">Hardware</a></li>
+                    <li><a href="#">Hat</a></li>
+                    <li><a href="#">Hipster</a></li>
+                    <li><a href="#">Holidays</a></li>
+                    <li><a href="#">Light</a></li>
+                    <li><a href="#">Mac</a></li>
+                    <li><a href="#">Place</a></li>
+                    <li><a href="#">T-Shirt</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">Video-2</a></li>
+                    <li><a href="#">White</a></li>
+                </ul>
+            </div>*@
+        </div>
+    </div>
+}
