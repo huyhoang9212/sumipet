@@ -16,91 +16,15 @@
                             </h2>
 
                             <ul class="category-nav__menu" id="js-cat-nav">
-                                <li class="category-nav__menu__item has-children">
-                                    <a href="shop.html">Fashion</a>
-                                    <div class="category-nav__submenu">
-                                        <div class="category-nav__submenu--inner">
-                                            <ul>
-                                                <li><a href="shop.html">Health &amp; Beauties</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="category-nav__menu__item has-children">
-                                    <a href="shop.html">Electronics</a>
-                                    <div class="category-nav__submenu mega-menu three-column">
-                                        <div class="category-nav__submenu--inner">
-                                            <h3 class="category-nav__submenu__title">Television</h3>
-                                            <ul>
-                                                <li><a href="shop.html">LED TV</a></li>
-                                                <li><a href="shop.html">LCD TV</a></li>
-                                                <li><a href="shop.html">Curved TV</a></li>
-                                                <li><a href="shop.html">Plasma TV</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="category-nav__submenu--inner">
-                                            <h3 class="category-nav__submenu__title">Refrigerator</h3>
-                                            <ul>
-                                                <li><a href="shop.html">LG</a></li>
-                                                <li><a href="shop.html">Samsung</a></li>
-                                                <li><a href="shop.html">Toshiba</a></li>
-                                                <li><a href="shop.html">Panasonic</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="category-nav__submenu--inner">
-                                            <h3 class="category-nav__submenu__title">Air Conditioners</h3>
-                                            <ul>
-                                                <li><a href="shop.html">Samsung</a></li>
-                                                <li><a href="shop.html">Panasonic</a></li>
-                                                <li><a href="shop.html">Sanaky</a></li>
-                                                <li><a href="shop.html">Toshiba</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="category-nav__menu__item">
-                                    <a href="shop.html">Baby</a>
-                                </li>
-                                <li class="category-nav__menu__item has-children">
-                                    <a href="shop.html"> Mobile</a>
-                                    <div class="category-nav__submenu">
-                                        <div class="category-nav__submenu--inner">
-                                            <ul>
-                                                <li><a href="shop.html">Apple</a></li>
-                                                <li><a href="shop.html">Samsung</a></li>
-                                                <li><a href="shop.html">Nokia</a></li>
-                                                <li><a href="shop.html">Walton</a></li>
-                                                <li><a href="shop.html">Sony</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="category-nav__menu__item">
-                                    <a href="shop.html">Furniture</a>
-                                    <div class="category-nav__submenu">
-                                        <div class="category-nav__submenu--inner">
-                                            <ul>
-                                                <li><a href="shop.html">Apple</a></li>
-                                                <li><a href="shop.html">Samsung</a></li>
-                                                <li><a href="shop.html">LG</a></li>
-                                                <li><a href="shop.html">Sony</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                              
-                      
-                               
-                                <li class="category-nav__menu__item hidden-lg-menu-item">
-                                    <a href="shop.html">Samsung</a>
-                                </li>
-                                <li class="category-nav__menu__item hidden-menu-item">
-                                    <a href="shop.html">Jewlery &amp; watches</a>
-                                </li>
-                                <li class="category-nav__menu__item">
-                                    <a href="shop.html" class="js-expand-hidden-menu"> More Categories</a>
-                                </li>
+
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <li class="category-nav__menu__item">
+                                        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a>
+                                    </li>
+                                }
                             </ul>
+
                         </div>
                     </div>
                     <!-- Category Nav End -->
