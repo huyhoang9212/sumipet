@@ -189,7 +189,11 @@
 
                     @foreach (var product in Model.Products)
                     {
-                        @await Html.PartialAsync("_SumiProductBox", product)
+
+                        <div class="col-lg-4 col-sm-6">
+                            @await Html.PartialAsync("_SumiProductBox", product)
+
+                        </div>
                     }
 
 

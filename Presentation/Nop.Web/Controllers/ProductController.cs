@@ -190,10 +190,11 @@ namespace Nop.Web.Controllers
 
             //model
             var model = _productModelFactory.PrepareProductDetailsModel(product, updatecartitem, false);
+
             //template
             var productTemplateViewPath = _productModelFactory.PrepareProductTemplateViewPath(product);
-
-            return View(productTemplateViewPath, model);
+            
+            return View("SumiProductTemplate.Simple", model);
         }
 
         [HttpPost]
