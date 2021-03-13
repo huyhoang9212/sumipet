@@ -130,7 +130,7 @@ namespace Nop.Web.Controllers
             return new RssActionResult(feed, _webHelper.GetThisPageUrl(false));
         }
 
-        public virtual IActionResult NewsItem(int newsItemId)
+        public virtual IActionResult NewsItem2(int newsItemId)
         {
             if (!_newsSettings.Enabled)
                 return RedirectToRoute("Homepage");
@@ -160,6 +160,39 @@ namespace Nop.Web.Controllers
                 DisplayEditLink(Url.Action("NewsItemEdit", "News", new { id = newsItem.Id, area = AreaNames.Admin }));
 
             return View(model);
+        }
+
+
+        public virtual IActionResult NewsItem(int newsItemId)
+        {
+            if (!_newsSettings.Enabled)
+                return RedirectToRoute("Homepage");
+
+            var newsItem = _newsService.GetNewsById(newsItemId);
+            if (newsItem == null)
+                return InvokeHttp404();
+
+            var notAvailable =
+                //published?
+                !newsItem.Published ||
+                //availability dates
+                !_newsService.IsNewsAvailable(newsItem) ||
+                //Store mapping
+                !_storeMappingService.Authorize(newsItem);
+            //Check whether the current user has a "Manage news" permission (usually a store owner)
+            //We should allows him (her) to use "Preview" functionality
+            var hasAdminAccess = _permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel) && _permissionService.Authorize(StandardPermissionProvider.ManageNews);
+            if (notAvailable && !hasAdminAccess)
+                return InvokeHttp404();
+
+            var model = new NewsItemModel();
+            model = _newsModelFactory.PrepareNewsItemModel(model, newsItem, true);
+
+            //display "edit" (manage) link
+            if (hasAdminAccess)
+                DisplayEditLink(Url.Action("NewsItemEdit", "News", new { id = newsItem.Id, area = AreaNames.Admin }));
+
+            return View("SumiNewsItem", model);
         }
 
         [HttpPost, ActionName("NewsItem")]

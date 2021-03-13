@@ -219,7 +219,12 @@
 
             <!--Category navigation -->
 
-            @await Component.InvokeAsync("SumiCategoryNavigation", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+            <div class="col-lg-4 col-xl-3 order-lg-1">
+                @await Component.InvokeAsync("SumiCategoryNavigation", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+
+
+            </div>
+
 
         </div>
     </div>

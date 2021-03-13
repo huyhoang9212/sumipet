@@ -21,10 +21,10 @@
 </nav>
 
 
-<main class="blog-page-section with-sidebar">
+<main class="">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-xl-9 order-lg-2  left-slide-margin">
+            <div class="col-lg-8 col-xl-9 order-lg-2  left-slide-margin"  style="margin-top: 36px">
 
                 <div class="blog-posts-container">
                     <!-- Blog Image Post -->
@@ -41,15 +41,15 @@
                                     <div class="blog-content mt--15 mt-md-0">
                                         <header>
                                             @*<div class="post-category text-primary">
-                                                <i class="fas fa-folder"></i>
-                                                <a href="#">Wordpress</a>,
-                                                <a href="#">Fasion</a>
-                                            </div>*@
+                                                    <i class="fas fa-folder"></i>
+                                                    <a href="#">Wordpress</a>,
+                                                    <a href="#">Fasion</a>
+                                                </div>*@
                                             <h3 class="blog-title"> <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })">@item.Title</a></h3>
                                             <div class="post-meta">
                                                 <span class="post-author">
                                                     <i class="fas fa-user"></i>
-                                                    <span class="text-gray">Posted by : </span>
+                                                    <span class="text-gray">Đăng bởi : </span>
                                                     admin
                                                 </span>
                                                 <span class="post-separator">|</span>
@@ -63,7 +63,7 @@
                                         <article>
                                             <h3 class="d-none sr-only">blog-article</h3>
                                             <p>
-                                               @Html.Raw(item.Short)
+                                                @Html.Raw(item.Short)
                                             </p>
                                         </article>
                                         <footer class="blog-post-footer">
@@ -92,7 +92,11 @@
 
             </div>
 
-            @await Component.InvokeAsync("SumiCategoryNavigation")
+            <div class="col-lg-4 col-xl-3 order-lg-1" style="margin-top: 36px">
+                @await Component.InvokeAsync("SumiCategoryNavigation")
+            </div>
+
+
 
         </div>
     </div>

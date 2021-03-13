@@ -23,26 +23,27 @@
         </div>
     }
 
-    <div class="col-lg-4 col-xl-3 order-lg-1">
-        <div class="sidebar-widget">
-            <div class="single-sidebar">
-                <h2 class="sidebar-title">DANH MỤC</h2>
-                <ul class="sidebar-filter-list">
-                    @foreach (var category in Model.Categories)
+
+
+    <div class="sidebar-widget">
+        <div class="single-sidebar">
+            <h2 class="sidebar-title">DANH MỤC</h2>
+            <ul class="sidebar-filter-list">
+                @foreach (var category in Model.Categories)
+                {
+                    var active = Model.CurrentCategoryId == category.Id;
+                    var liClass = active ? "active" : "inactive";
+
+                    var categoryLineModel = new CategoryNavigationModel.CategoryLineModel
                     {
-                        var active = Model.CurrentCategoryId == category.Id;
-                        var liClass = active ? "active" : "inactive";
+                        CurrentCategoryId = Model.CurrentCategoryId,
+                        Category = category
+                    };
 
-                        var categoryLineModel = new CategoryNavigationModel.CategoryLineModel
-                        {
-                            CurrentCategoryId = Model.CurrentCategoryId,
-                            Category = category
-                        };
+                    <li class="@liClass"><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></li>
+                }
 
-                        <li class="@liClass"><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></li>
-                    }
-
-                    @*<li><a href="#" data-count="(5)">Accessories</a></li>
+                @*<li><a href="#" data-count="(5)">Accessories</a></li>
                     <li><a href="#" data-count="(13)">Bedroom</a></li>
                     <li><a href="#" data-count="(13)">Decor & Furniture</a></li>
                     <li><a href="#" data-count="(12)">Electronics & Computer</a></li>
@@ -57,9 +58,9 @@
                     <li><a href="#" data-count="(0)">Toy, Kids & Baby</a></li>
                     <li><a href="#" data-count="(9)">Uncategorized</a></li>
                     <li><a href="#" data-count="(4)">Women</a></li>*@
-                </ul>
-            </div>
-            @*<div class="single-sidebar">
+            </ul>
+        </div>
+        @*<div class="single-sidebar">
                 <h2 class="sidebar-title">Color</h2>
                 <ul class="sidebar-filter-list">
                     <li><a href="#" data-count="(4)">Gold</a></li>
@@ -143,6 +144,5 @@
                     <li><a href="#">White</a></li>
                 </ul>
             </div>*@
-        </div>
     </div>
 }
