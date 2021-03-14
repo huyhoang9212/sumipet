@@ -95,6 +95,15 @@ namespace Nop.Web.Controllers
                 return RedirectToRoute("Homepage");
 
             var model = _blogModelFactory.PrepareBlogPostListModel(command);
+            return View("SumiList", model);
+        }
+
+        public virtual IActionResult List2(BlogPagingFilteringModel command)
+        {
+            if (!_blogSettings.Enabled)
+                return RedirectToRoute("Homepage");
+
+            var model = _blogModelFactory.PrepareBlogPostListModel(command);
             return View("List", model);
         }
 

@@ -1,0 +1,178 @@
+﻿@model BlogPostListModel
+@{
+    //  Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Blog").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-blog-page");
+}
+
+
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.RouteUrl("Homepage")">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+        </ol>
+    </div>
+</nav>
+
+<section class="blog-page-section with-sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-9 order-lg-2  left-slide-margin">
+
+                <div class="blog-posts-container">
+
+
+                    @foreach (var item in Model.BlogPosts)
+                    {
+                        <!-- Blog Image Post -->
+                        <div class="blog-post blog-style-list">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-6">
+                                    <a href="@Url.RouteUrl("BlogPost", new { SeName = item.SeName })" class="blog-image">
+
+                                        @if (item.PictureModel?.ImageUrl != null)
+                                        {
+                                            <img src="@item.PictureModel.ImageUrl" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="image/product/slidebar-promo-product.jpg" alt="">
+                                        }
+                                    </a>
+                                </div>
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="blog-content mt--15 mt-md-0">
+                                        <header>
+                                            @if (item.Tags.Count > 0)
+                                            {
+                                            <div class="post-category text-primary">
+
+                                                <i class="fas fa-folder"></i>
+
+                                                @for (var i = 0; i < item.Tags.Count; i++)
+                                                {
+                                                    var tag = item.Tags[i];
+                                                    <a href="@Url.RouteUrl("BlogByTag", new {tag = tag})">@tag</a>
+                                                    if (i != item.Tags.Count - 1)
+                                                    {
+                                                        <span class="separator">,</span>
+                                                    }
+                                                }
+                                            </div>
+                                            }
+
+
+                                            <h3 class="blog-title"> <a href="@Url.RouteUrl("BlogPost", new {SeName = item.SeName})">@item.Title</a></h3>
+                                            <div class="post-meta">
+                                                <span class="post-author">
+                                                    <i class="fas fa-user"></i>
+                                                    <span class="text-gray">Đăng bởi : </span>
+                                                    admin
+                                                </span>
+                                                <span class="post-separator">|</span>
+                                                <span class="post-date">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                    <span class="text-gray">On : </span>
+                                                    @item.CreatedOn.ToShortDateString()
+                                                </span>
+                                            </div>
+                                        </header>
+                                        <article>
+                                            <h3 class="d-none sr-only">blog-article</h3>
+                                            @Html.Raw(!string.IsNullOrEmpty(item.BodyOverview) ? item.BodyOverview : item.Body)
+                                        </article>
+                                        <footer class="blog-post-footer">
+                                            <div class="blog-btn">
+                                                <a href="blog-details.html" class="btn btn-rounded btn-outlined--primary">Đọc tiếp</a>
+                                            </div>
+                                            <div class="social-links">
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-facebook-f"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-twitter"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-pinterest-p"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-google-plus-g"></i></a>
+                                                <a href="#" class="single-social social-rounded"><i class="fab fa-linkedin-in"></i></a>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+
+
+                @{
+                    var sumipager = Html.SumiPager(Model.PagingFilteringContext).QueryParam("pagenumber");
+                }
+                @if (!sumipager.IsEmpty())
+                {
+                    <div class="pagination-widget">
+                        @sumipager
+                    </div>
+                }
+
+
+
+
+
+
+            </div>
+
+            <div class="col-lg-4 col-xl-3 order-lg-1">
+                <div class="sidebar-widget">
+                    @*<div class="single-sidebar">
+                            <h2 class="sidebar-title">Search</h2>
+                            <div class="site-mini-search">
+                                <input type="text" placeholder="Search">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>*@
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">BLOG ARCHIVES</h2>
+                        <ul class="sidebar-list">
+                            <li><a href="#"> March 2015 (1)</a></li>
+                            <li><a href="#">December 2014 (3)</a></li>
+                            <li> <a href="#">November 2014 (4)</a></li>
+                            <li><a href="#">September 2014 (1)</a></li>
+                            <li><a href="#">August 2014 (1)</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="single-sidebar">
+                        <h2 class="sidebar-title">TAGS</h2>
+                        <ul class="sidebar-tag-list">
+                            <li><a href="#"> Chilled</a></li>
+                            <li><a href="#">Dark</a></li>
+                            <li> <a href="#">Euro</a></li>
+                            <li><a href="#">Fashion</a></li>
+                            <li><a href="#">Food</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Hat</a></li>
+                            <li><a href="#">Hipster</a></li>
+                            <li><a href="#">Holidays</a></li>
+                            <li><a href="#">Light</a></li>
+                            <li><a href="#">Mac</a></li>
+                            <li><a href="#">Place</a></li>
+                            <li><a href="#">T-Shirt</a></li>
+                            <li><a href="#">Travel</a></li>
+                            <li><a href="#">Video-2</a></li>
+                            <li><a href="#">White</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
