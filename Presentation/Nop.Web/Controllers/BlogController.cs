@@ -113,7 +113,7 @@ namespace Nop.Web.Controllers
                 return RedirectToRoute("Homepage");
 
             var model = _blogModelFactory.PrepareBlogPostListModel(command);
-            return View("List", model);
+            return View("SumiList", model);
         }
 
         public virtual IActionResult BlogByMonth(BlogPagingFilteringModel command)
@@ -122,7 +122,7 @@ namespace Nop.Web.Controllers
                 return RedirectToRoute("Homepage");
 
             var model = _blogModelFactory.PrepareBlogPostListModel(command);
-            return View("List", model);
+            return View("SumiList", model);
         }
 
         public virtual IActionResult ListRss(int languageId)
