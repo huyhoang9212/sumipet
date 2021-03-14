@@ -175,6 +175,36 @@ namespace Nop.Web.Controllers
             var model = new BlogPostModel();
             _blogModelFactory.PrepareBlogPostModel(model, blogPost, true);
 
+            return View("SumiBlogPost",model);
+        }
+
+        public virtual IActionResult BlogPost2(int blogPostId)
+        {
+            if (!_blogSettings.Enabled)
+                return RedirectToRoute("Homepage");
+
+            var blogPost = _blogService.GetBlogPostById(blogPostId);
+            if (blogPost == null)
+                return InvokeHttp404();
+
+            var notAvailable =
+                //availability dates
+                !_blogService.BlogPostIsAvailable(blogPost) ||
+                //Store mapping
+                !_storeMappingService.Authorize(blogPost);
+            //Check whether the current user has a "Manage blog" permission (usually a store owner)
+            //We should allows him (her) to use "Preview" functionality
+            var hasAdminAccess = _permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel) && _permissionService.Authorize(StandardPermissionProvider.ManageBlog);
+            if (notAvailable && !hasAdminAccess)
+                return InvokeHttp404();
+
+            //display "edit" (manage) link
+            if (hasAdminAccess)
+                DisplayEditLink(Url.Action("BlogPostEdit", "Blog", new { id = blogPost.Id, area = AreaNames.Admin }));
+
+            var model = new BlogPostModel();
+            _blogModelFactory.PrepareBlogPostModel(model, blogPost, true);
+
             return View(model);
         }
 

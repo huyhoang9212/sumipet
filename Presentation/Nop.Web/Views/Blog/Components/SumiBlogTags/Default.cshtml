@@ -1,0 +1,33 @@
+﻿@model BlogPostTagListModel
+@if (Model.Tags.Count > 0)
+{
+    <div class="single-sidebar">
+        <h2 class="sidebar-title">TAGS</h2>
+
+        <ul class="sidebar-tag-list">
+
+            @foreach (var item in Model.Tags)
+            {
+                <li>
+                    <a href="@Url.RouteUrl("BlogByTag", new { tag = item.Name })" style="font-size:@(Model.GetFontSize(item))%;">@item.Name</a>
+                </li>
+            }
+            @*<li><a href="#"> Chilled</a></li>
+            <li><a href="#">Dark</a></li>
+            <li> <a href="#">Euro</a></li>
+            <li><a href="#">Fashion</a></li>
+            <li><a href="#">Food</a></li>
+            <li><a href="#">Hardware</a></li>
+            <li><a href="#">Hat</a></li>
+            <li><a href="#">Hipster</a></li>
+            <li><a href="#">Holidays</a></li>
+            <li><a href="#">Light</a></li>
+            <li><a href="#">Mac</a></li>
+            <li><a href="#">Place</a></li>
+            <li><a href="#">T-Shirt</a></li>
+            <li><a href="#">Travel</a></li>
+            <li><a href="#">Video-2</a></li>
+            <li><a href="#">White</a></li>*@
+        </ul>
+    </div>
+}

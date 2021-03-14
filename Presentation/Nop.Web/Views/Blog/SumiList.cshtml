@@ -50,20 +50,20 @@
                                         <header>
                                             @if (item.Tags.Count > 0)
                                             {
-                                            <div class="post-category text-primary">
+                                                <div class="post-category text-primary">
 
-                                                <i class="fas fa-folder"></i>
+                                                    <i class="fas fa-folder"></i>
 
-                                                @for (var i = 0; i < item.Tags.Count; i++)
-                                                {
-                                                    var tag = item.Tags[i];
-                                                    <a href="@Url.RouteUrl("BlogByTag", new {tag = tag})">@tag</a>
-                                                    if (i != item.Tags.Count - 1)
+                                                    @for (var i = 0; i < item.Tags.Count; i++)
                                                     {
-                                                        <span class="separator">,</span>
+                                                        var tag = item.Tags[i];
+                                                        <a href="@Url.RouteUrl("BlogByTag", new {tag = tag})">@tag</a>
+                                                        if (i != item.Tags.Count - 1)
+                                                        {
+                                                            <span class="separator">,</span>
+                                                        }
                                                     }
-                                                }
-                                            </div>
+                                                </div>
                                             }
 
 
@@ -88,7 +88,7 @@
                                         </article>
                                         <footer class="blog-post-footer">
                                             <div class="blog-btn">
-                                                <a href="blog-details.html" class="btn btn-rounded btn-outlined--primary">Đọc tiếp</a>
+                                                <a href="@Url.RouteUrl("BlogPost", new { SeName = item.SeName })" class="btn btn-rounded btn-outlined--primary">Đọc tiếp</a>
                                             </div>
                                             <div class="social-links">
                                                 <a href="#" class="single-social social-rounded"><i class="fab fa-facebook-f"></i></a>
@@ -136,39 +136,17 @@
                                 <button><i class="fas fa-search"></i></button>
                             </div>
                         </div>*@
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">BLOG ARCHIVES</h2>
-                        <ul class="sidebar-list">
-                            <li><a href="#"> March 2015 (1)</a></li>
-                            <li><a href="#">December 2014 (3)</a></li>
-                            <li> <a href="#">November 2014 (4)</a></li>
-                            <li><a href="#">September 2014 (1)</a></li>
-                            <li><a href="#">August 2014 (1)</a></li>
-                        </ul>
-                    </div>
 
 
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">TAGS</h2>
-                        <ul class="sidebar-tag-list">
-                            <li><a href="#"> Chilled</a></li>
-                            <li><a href="#">Dark</a></li>
-                            <li> <a href="#">Euro</a></li>
-                            <li><a href="#">Fashion</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Hardware</a></li>
-                            <li><a href="#">Hat</a></li>
-                            <li><a href="#">Hipster</a></li>
-                            <li><a href="#">Holidays</a></li>
-                            <li><a href="#">Light</a></li>
-                            <li><a href="#">Mac</a></li>
-                            <li><a href="#">Place</a></li>
-                            <li><a href="#">T-Shirt</a></li>
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Video-2</a></li>
-                            <li><a href="#">White</a></li>
-                        </ul>
-                    </div>
+                    @await Component.InvokeAsync("SumiBlogMonths")
+
+
+
+
+                    @await Component.InvokeAsync("SumiBlogTags")
+
+
+
 
                 </div>
             </div>
