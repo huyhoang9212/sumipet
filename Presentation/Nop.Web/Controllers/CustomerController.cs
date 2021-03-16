@@ -389,7 +389,7 @@ namespace Nop.Web.Controllers
         public virtual IActionResult Login(bool? checkoutAsGuest)
         {
             var model = _customerModelFactory.PrepareLoginModel(checkoutAsGuest);
-            return View(model);
+            return View("SumiLogin", model);
         }
 
         [HttpPost]
@@ -463,7 +463,7 @@ namespace Nop.Web.Controllers
 
             //If we got this far, something failed, redisplay form
             model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
-            return View(model);
+            return View("SumiLogin", model);
         }
 
         //available even when a store is closed
@@ -685,7 +685,7 @@ namespace Nop.Web.Controllers
             var model = new RegisterModel();
             model = _customerModelFactory.PrepareRegisterModel(model, false, setDefaultValues: true);
 
-            return View(model);
+            return View("SumiRegister",model);
         }
 
         [HttpPost]
@@ -1093,7 +1093,7 @@ namespace Nop.Web.Controllers
             var model = new CustomerInfoModel();
             model = _customerModelFactory.PrepareCustomerInfoModel(model, _workContext.CurrentCustomer, false);
 
-            return View(model);
+            return View("SumiInfo",model);
         }
 
         [HttpPost]

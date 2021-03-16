@@ -1,0 +1,120 @@
+﻿@model RegisterModel
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Register").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-registration-page");
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.RouteUrl("Homepage")">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Đăng Ký</li>
+        </ol>
+    </div>
+</nav>
+<!--=============================================
+=            Login Register page content         =
+=============================================-->
+
+<main class="page-section pb--10 pt--50">
+    <div class="container">
+        @*<header class="entry-header">
+            <h1 class="entry-title">My Account</h1>
+        </header>*@
+        <div class="row">
+            <!--<div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">-->
+            <!-- Login Form s-->
+            <!--<form action="./">
+
+                    <h4 class="login-title">Login</h4>
+                    <div class="login-form">
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb--20">
+                                <label>Username or email address *</label>
+                                <input class="mb-0" type="email">
+                            </div>
+                            <div class="col-12 mb--20">
+                                <label>Password</label>
+                                <input class="mb-0" type="password">
+                            </div>
+                            <div class="col-md-12">
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <a href="#" class="btn btn-black   mr-3">Login</a>
+                                    <div class="d-inline-flex align-items-center">
+                                        <input type="checkbox" id="accept_terms" class="mb-0 mr-1">
+                                        <label for="accept_terms" class="mb-0 font-weight-400">Remember Me</label>
+                                    </div>
+                                </div>
+                                <p><a href="#" class="pass-lost mt-3">Lost your password?</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>-->
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                <form asp-route="Register" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly" class="message-error"></div>
+
+                    <h4 class="login-title">Đăng Ký</h4>
+                    <div class="login-form">
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb--20">
+                                <label asp-for="FirstName" asp-postfix=":"></label>
+                                <input class="mb-0" asp-for="FirstName" />
+                                <span asp-validation-for="FirstName"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb--20">
+                                <label asp-for="LastName" asp-postfix=":"></label>
+                                <input class="mb-0" asp-for="LastName" />
+                                <span asp-validation-for="LastName"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb--20">
+                                <label asp-for="Email" asp-postfix=":"></label>
+                                <input class="mb-0" type="email" asp-for="Email" />
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 mb--20">
+                                <label asp-for="Password" asp-postfix=":"></label>
+                                <input class="mb-0" asp-for="Password" />
+                                <span asp-validation-for="Password"></span>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb--20">
+                                <label asp-for="ConfirmPassword" asp-postfix=":"></label>
+                                <input class="mb-0" asp-for="ConfirmPassword" />
+                                <span asp-validation-for="ConfirmPassword"></span>
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+
+                            <div class="col-md-6">
+                                <button href="#" id="register-button" class="btn btn-black" type="submit" name="register-button">Đăng Ký</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!--=====  End of Login Register page content  ======-->

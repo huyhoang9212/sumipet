@@ -1,0 +1,102 @@
+﻿@using Nop.Core
+@model CustomerInfoModel
+@inject Nop.Core.IWebHelper webHelper
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Account").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-customer-info-page");
+}
+
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.RouteUrl("Homepage")">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tài khoản của tôi</li>
+        </ol>
+    </div>
+</nav>
+
+<div class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+
+                    <!-- My Account Tab Menu End -->
+                    <!-- My Account Tab Content Start -->
+                    <div class="col-lg-9 col-12 mt--30 mt-lg-0">
+                        <div class="tab-content" id="myaccountContent">
+
+                            <div class="tab-pane fade active show" id="account-info" role="tabpanel">
+                                <div class="myaccount-content">
+                                    <h3>Chi tiết tài khoản</h3>
+
+                                    <div class="account-details-form">
+                                        <form asp-route="CustomerInfo" method="post">
+                                            <div asp-validation-summary="ModelOnly" class="message-error"></div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 col-12 mb-30">
+                                                    <input asp-for="FirstName" />
+
+                                                    @*<input id="first-name" placeholder="First Name" type="text">*@
+                                                </div>
+
+                                                <div class="col-lg-6 col-12 mb-30">
+                                                    <input asp-for="LastName" />
+
+                                                    @*<input id="last-name" placeholder="Last Name" type="text">*@
+                                                </div>
+
+                                                @*<div class="col-12 mb-30">
+                                                    <input id="display-name" placeholder="Display Name" type="text">
+                                                </div>*@
+
+                                            <div class="col-12 mb-30">
+                                                <input asp-for="Email" />
+                                                <span asp-validation-for="Email"></span>
+
+                                                @*<input id="email" placeholder="Email Address" type="email">*@
+                                            </div>
+
+                                                @*<div class="col-12 mb-30"><h4>Password change</h4></div>*@
+
+                                                @*<div class="col-12 mb-30">
+                                                    <input id="current-pwd" placeholder="Current Password" type="password">
+                                                </div>
+
+                                                <div class="col-lg-6 col-12 mb-30">
+                                                    <input id="new-pwd" placeholder="New Password" type="password">
+                                                </div>
+
+                                                <div class="col-lg-6 col-12 mb-30">
+                                                    <input id="confirm-pwd" placeholder="Confirm Password" type="password">
+                                                </div>*@
+
+                                            <div class="col-12">
+                                                @*<input type="submit" id="save-info-button" value="@T("Common.Save")" name="save-info-button" class="button-1 save-customer-info-button" />*@
+                                                <button href="#" id="save-info-button" class="btn btn-black" type="submit" name="register-button">@T("Common.Save")</button>
+
+                                                @*<button class="theme-btn">Save Changes</button>*@
+                                            </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Tab Content End -->
+                        </div>
+                    </div>
+                    <!-- My Account Tab Content End -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
