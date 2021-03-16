@@ -1,0 +1,340 @@
+﻿@model ContactUsModel
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.ContactUs").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-contact-page");
+}
+
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+        </ol>
+    </div>
+</nav>
+
+<div class="gogle_map">
+
+
+</div>
+
+@*<div class="gogle_map">
+        <div id="googleMap">
+
+        </div>
+    </div>*@
+
+<section class="ct-feature-section">
+    <div class="container">
+        <div class="row justify-content-center text-center mb--20">
+            <div class="col-lg-4 col-md-6 col-sm-8 col-12">
+                <div class="ct-section-title-2">
+                    <h2 class="mb--15">CONTACT US</h2>
+                    <p>
+                        Claritas est etiam processus dynamicus, qui sequitur
+                        mutationem consuetudium lectorum.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 mt--30">
+                <div class="ct-feature">
+                    <div class="icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Address Street</h3>
+                    <p>
+                        Address : No 40 Baria Sreet 133/2<br>
+                        NewYork City, NY, United States.
+                    </p>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mt--30">
+                <div class="ct-feature">
+                    <div class="icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Number Phone</h3>
+                    <p>
+                        Phone 1: 0(1234) 567 89012<br>
+                        Phone 2: 0(987) 567 890
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mt--30">
+                <div class="ct-feature">
+                    <div class="icon">
+                        <i class="fas fa-fax"></i>
+                    </div>
+                    <h3>Number Fax</h3>
+                    <p>
+                        Fax 1: 0(1234) 567 89012<br>
+                        Fax 2: 0(987) 567 89
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mt--30">
+                <div class="ct-feature">
+                    <div class="icon">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <h3>Address email</h3>
+                    <p>
+                        info@roadthemes.com<br>
+                        yourname@roadthemes.com
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="contact-page-section section-padding bg-gray">
+
+    <div class="container">
+        <div class="ct-section-title-2 mb--60 text-center">
+            <h2>TELL US YOUR PROJECT</h2>
+        </div>
+        <form action="php/mail.php" class="site-form contact-form-2" id="contact-form">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name*">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name*">
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email*">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Message*"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="submit-btn">
+                        <button type="submit" class="btn btn-black">Send Mail</button>
+                    </div>
+                </div>
+                <div class="form-messege"></div>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+<section class="contact-page-section section-padding bg-gray">
+
+    <div class="container">
+        <div class="ct-section-title-2 mb--60 text-center">
+            <h2>Phòng khám thú y Sumi Pet</h2>
+        </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.1590329075946!2d106.67520472919264!3d10.990813499511036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d1a1272067bf%3A0x4f8f1e3a7c7e05c1!2zUGjDsm5nIEtow6FtIFRow7ogWSBTdW1pIFBldA!5e0!3m2!1sen!2s!4v1615911352734!5m2!1sen!2s" width="1200" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+    </div>
+
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo"></script>
+
+<script>
+    // When the window has finished loading create our google map below
+    google.maps.event.addDomListener(window, 'load', init);
+
+    function init() {
+        // Basic options for a simple Google Map
+        // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+        var mapOptions = {
+            // How zoomed in you want the map to start at (always required)
+            zoom: 12,
+
+            scrollwheel: false,
+
+            // The latitude and longitude to center the map (always required)
+            center: new google.maps.LatLng(23.761226, 90.420766), // New York
+
+            // How you would like to style the map.
+            // This is where you would paste any style found on Snazzy Maps.
+            styles: [{
+                "featureType": "all",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "saturation": 36
+                },
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 40
+                }
+                ]
+            },
+            {
+                "featureType": "all",
+                "elementType": "labels.text.stroke",
+                "stylers": [{
+                    "visibility": "on"
+                },
+                {
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 16
+                }
+                ]
+            },
+            {
+                "featureType": "all",
+                "elementType": "labels.icon",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 20
+                }
+                ]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "geometry.stroke",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 17
+                },
+                {
+                    "weight": 1.2
+                }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 20
+                }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 21
+                }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 17
+                }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 29
+                },
+                {
+                    "weight": 0.2
+                }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 18
+                }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 16
+                }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 19
+                }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#000000"
+                },
+                {
+                    "lightness": 17
+                }
+                ]
+            }
+            ]
+        };
+
+        // Get the HTML DOM element that will contain your map
+        // We are using a div with id="map" seen below in the <body>
+        var mapElement = document.getElementById('googleMap');
+
+        // Create the Google Map using our element and options defined above
+        var map = new google.maps.Map(mapElement, mapOptions);
+
+        // Let's also add a marker while we're at it
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(106.67575189998905, 10.990821398057221),
+            map: map,
+            title: 'googlemap!',
+            animation: google.maps.Animation.BOUNCE
+
+        });
+    }
+</script>

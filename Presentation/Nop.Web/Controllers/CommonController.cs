@@ -180,7 +180,7 @@ namespace Nop.Web.Controllers
         {
             var model = new ContactUsModel();
             model = _commonModelFactory.PrepareContactUsModel(model, false);
-            return View(model);
+            return View("SumiContactUs", model);
         }
 
         [HttpPost, ActionName("ContactUs")]        
@@ -212,10 +212,10 @@ namespace Nop.Web.Controllers
                 _customerActivityService.InsertActivity("PublicStore.ContactUs",
                     _localizationService.GetResource("ActivityLog.PublicStore.ContactUs"));
 
-                return View(model);
+                return View("SumiContactUs", model);
             }
 
-            return View(model);
+            return View("SumiContactUs", model);
         }
 
         //contact vendor page
