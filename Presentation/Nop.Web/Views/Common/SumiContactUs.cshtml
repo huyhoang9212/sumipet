@@ -12,8 +12,8 @@
 <nav aria-label="breadcrumb" class="breadcrumb-wrapper">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+            <li class="breadcrumb-item"><a href="@Url.RouteUrl("Homepage")">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liên Hệ</li>
         </ol>
     </div>
 </nav>
@@ -34,10 +34,9 @@
         <div class="row justify-content-center text-center mb--20">
             <div class="col-lg-4 col-md-6 col-sm-8 col-12">
                 <div class="ct-section-title-2">
-                    <h2 class="mb--15">CONTACT US</h2>
+                    <h2 class="mb--15">Liên hệ chúng tôi ngay</h2>
                     <p>
-                        Claritas est etiam processus dynamicus, qui sequitur
-                        mutationem consuetudium lectorum.
+                        Chúng tôi có đội ngũ tư vấn, sẵn sàng giải đáp mọi thắc mắc của bạn.
                     </p>
                 </div>
             </div>
@@ -48,10 +47,10 @@
                     <div class="icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3>Address Street</h3>
+                    <h3>Địa chỉ</h3>
                     <p>
-                        Address : No 40 Baria Sreet 133/2<br>
-                        NewYork City, NY, United States.
+                        28 Lê Hồng Phong, Phú Hòa<br>
+                        Thủ Dầu Một, Bình Dương, Việt Nam.
                     </p>
 
                 </div>
@@ -61,22 +60,21 @@
                     <div class="icon">
                         <i class="fas fa-phone"></i>
                     </div>
-                    <h3>Number Phone</h3>
+                    <h3>Phone</h3>
                     <p>
-                        Phone 1: 0(1234) 567 89012<br>
-                        Phone 2: 0(987) 567 890
+                        Phone 1: 0(943) 637 631<br>
+                        Phone 2: 0(908) 934 369
                     </p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 mt--30">
                 <div class="ct-feature">
                     <div class="icon">
-                        <i class="fas fa-fax"></i>
+                        <i class="fas fa-phone"></i>
                     </div>
-                    <h3>Number Fax</h3>
+                    <h3>Facebook</h3>
                     <p>
-                        Fax 1: 0(1234) 567 89012<br>
-                        Fax 2: 0(987) 567 89
+                        <a href="https://www.facebook.com/Ph%C3%B2ng-kh%C3%A1m-th%C3%BA-y-Sumi-pet-100373612063601">Fanpage</a><br>
                     </p>
                 </div>
             </div>
@@ -85,10 +83,11 @@
                     <div class="icon">
                         <i class="far fa-envelope"></i>
                     </div>
-                    <h3>Address email</h3>
+                    <h3>Email</h3>
                     <p>
-                        info@roadthemes.com<br>
-                        yourname@roadthemes.com
+                        phamvanhuynh07071985@gmail.com
+                        <br>
+                        phongkhamthuysumipet@gmail.com
                     </p>
                 </div>
             </div>
@@ -99,38 +98,64 @@
 
     <div class="container">
         <div class="ct-section-title-2 mb--60 text-center">
-            <h2>TELL US YOUR PROJECT</h2>
+            <h2>GỬI YÊU CẦU CỦA BẠN</h2>
         </div>
-        <form action="php/mail.php" class="site-form contact-form-2" id="contact-form">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name*">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name*">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email*">
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-group">
-                        <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Message*"></textarea>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="submit-btn">
-                        <button type="submit" class="btn btn-black">Send Mail</button>
-                    </div>
-                </div>
-                <div class="form-messege"></div>
+
+        @if (Model.SuccessfullySent)
+        {
+            <div class="result">
+                @Model.Result
             </div>
-        </form>
+        }
+        else
+        {
+            <form asp-controller="Common" asp-action="ContactUs" method="post" class="site-form contact-form-2" id="contact-form">
+                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+
+
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input asp-for="FullName" placeholder="@T("ContactUs.FullName.Hint")" class="form-control" />
+                            <span asp-validation-for="FullName"></span>
+
+                            @*<input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name*">*@
+                        </div>
+                    </div>
+                    @*<div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name*">
+                        </div>
+                    </div>*@
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input asp-for="Email" placeholder="@T("ContactUs.Email.Hint")" class="form-control" type="email" name="email" />
+                            <span asp-validation-for="Email"></span>
+
+                            @*<input type="email" name="email" id="email" class="form-control" placeholder="Email*">*@
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <textarea cols="30" rows="10" class="form-control" asp-for="Enquiry" placeholder="@T("ContactUs.Enquiry.Hint")"></textarea>
+                            @*<nop-required />*@
+                            <span asp-validation-for="Enquiry"></span>
+                            @*<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Message*"></textarea>*@
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="submit-btn">
+                            <button type="submit" class="btn btn-black">Gửi</button>
+                            @*<input type="submit" name="send-email" class="button-1 contact-us-button" value="@T("ContactUs.Button")" />*@
+
+                        </div>
+                    </div>
+                    <div class="form-messege"></div>
+                </div>
+            </form>
+        }
+
+
     </div>
 
 </section>
