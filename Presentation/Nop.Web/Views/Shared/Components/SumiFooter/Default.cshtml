@@ -6,70 +6,89 @@
 <footer class="site-footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="single-footer contact-block">
-                    <h3 class="footer-title">Contact</h3>
+                    <h3 class="footer-title">Bản đồ</h3>
                     <div class="single-footer-content">
                         @*<p class="text-italic">We are a team of designers and developers that create high quality Wordpress, Magento, Prestashop, Opencart.</p>*@
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.1590329075946!2d106.67520472919264!3d10.990813499511036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d1a1272067bf%3A0x4f8f1e3a7c7e05c1!2zUGjDsm5nIEtow6FtIFRow7ogWSBTdW1pIFBldA!5e0!3m2!1sen!2s!4v1615911352734!5m2!1sen!2s" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-
                         <p class="font-weight-500 text-white">
-                            <span class="d-block">ĐỊA CHỈ:</span>
                             28, Lê Hồng Phong, Phú Lợi, Thủ Dầu Một
                         </p>
-                        <p class="social-icons">
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fas fa-rss"></i></a>
-                        </p>
+
+                        @*<p class="social-icons">
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a href=""><i class="fas fa-rss"></i></a>
+                            </p>*@
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-2 col-sm-6">
                 <div class="single-footer contact-block">
-                    <h3 class="footer-title">Information</h3>
+                    <h3 class="footer-title">Sumi Pet</h3>
                     <div class="single-footer-content">
                         <ul class="footer-list">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">My orders</a></li>
-                            <li><a href="#">Returns & Exchanges</a></li>
-                            <li><a href="#">Shipping & Delivery</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="@Url.RouteUrl("NewsItem", new { SeName = "gioi-thieu-cong-ty" })">Giới Thiệu</a></li>
+                            <li><a href="@Url.RouteUrl("ContactUs")">Liên hệ</a></li>
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">Chính sách đổi trả</a></li>
+                            <li><a href="@Url.RouteUrl("NewsArchive")">Tin tức</a></li>
+                            <li><a href="@Url.RouteUrl("Blog")">Bài viêt</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-sm-6">
+            <div class="col-lg-4 col-sm-6">
                 <div class="single-footer contact-block">
-                    <h3 class="footer-title">CUSTOMER CARE</h3>
+                    <h3 class="footer-title">Chăm sóc khách hàng</h3>
                     <div class="single-footer-content">
+                        @*<p>
+                                Hotline 1: 0913 820 812&nbsp;<br>
+                                Hotline 2: 0949 267 269 - Đặt và giao hàng tận nơi<br>
+                                Mail: phongkhamthuyyk9@yahoo.com<br>
+                                Website: phongkhamthuyk9.com</span>
+                            </p>*@
                         <ul class="footer-list">
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Order History</a></li>
-                            <li><a href="#">Site Map</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Notification</a></li>
+                            <li>
+                                <a href="#">
+                                    Hotline 1: 0943-637-631
+                                </a>
+                            </li>
+                            <li><a href="#"> Hotline 2: 0943-637-631</a></li>
+                            <li><a href="#"> Mail: phamvanhuynh07071985@gmail.com</a></li>
+                            <li><a href="#"> Web: https://phongkhamthuysumipet.com</a></li>
+                            <li><a href="https://facebook.com/Ph%C3%B2ng-kh%C3%A1m-Th%C3%BA-y-SumiPet-Th%E1%BB%A7-D%E1%BA%A7u-M%E1%BB%99t-112046094260189"> Fanpage: Phòng khám thú y SumiPet</a></li>
+                            <li>
+                                <p class="social-icons">
+                                    <a href="https://facebook.com/Ph%C3%B2ng-kh%C3%A1m-Th%C3%BA-y-SumiPet-Th%E1%BB%A7-D%E1%BA%A7u-M%E1%BB%99t-112046094260189"><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fas fa-rss"></i></a>
+                                </p>
+                            </li>
+                           
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="single-footer contact-block">
-                    <h3 class="footer-title">SUBSCRIBE TO OUR NEWSLETTER</h3>
+                    <h3 class="footer-title">
+                        ĐĂNG KÝ NHẬN TIN
+                    </h3>
                     <div class="single-footer-content">
                         <p>
-                            Subscribe to the Petmark mailing list to receive updates on new arrivals, special offers and other discount information.
+                            Đăng ký nhận tin cùng Sumi Pet Để nhận thêm các ưu đãi
                         </p>
                         <div class="pt-2">
                             <div class="input-box-with-icon">
-                                <input type="text" placeholder="Enter Your email">
+                                <input type="text" placeholder="Email của bạn">
                                 <button><i class="fas fa-envelope"></i></button>
                             </div>
                         </div>
@@ -79,56 +98,56 @@
         </div>
 
         @*<div class="footer-block-2 text-center">
-            <ul class="footer-list list-inline justify-content-center">
-                <li><a href="">Online Shopping</a></li>
+                <ul class="footer-list list-inline justify-content-center">
+                    <li><a href="">Online Shopping</a></li>
 
-                <li><a href="">Promotions</a></li>
+                    <li><a href="">Promotions</a></li>
 
-                <li><a href=""> My Orders</a></li>
+                    <li><a href=""> My Orders</a></li>
 
-                <li><a href="">Help</a></li>
+                    <li><a href="">Help</a></li>
 
-                <li><a href="">Customer Service</a></li>
+                    <li><a href="">Customer Service</a></li>
 
-                <li><a href="">Support</a></li>
+                    <li><a href="">Support</a></li>
 
-                <li><a href=""> Most Populars</a></li>
+                    <li><a href=""> Most Populars</a></li>
 
-                <li><a href="">New Arrivals</a></li>
+                    <li><a href="">New Arrivals</a></li>
 
-                <li><a href="">Special Products</a></li>
+                    <li><a href="">Special Products</a></li>
 
-                <li><a href="">Manufacturers</a></li>
+                    <li><a href="">Manufacturers</a></li>
 
-                <li><a href="">Our Stores</a></li>
-            </ul>
-            <ul class="footer-list list-inline justify-content-center">
-                <li><a href="">Shipping</a></li>
+                    <li><a href="">Our Stores</a></li>
+                </ul>
+                <ul class="footer-list list-inline justify-content-center">
+                    <li><a href="">Shipping</a></li>
 
-                <li><a href="">Payments</a></li>
+                    <li><a href="">Payments</a></li>
 
-                <li><a href="">Warantee</a></li>
+                    <li><a href="">Warantee</a></li>
 
-                <li><a href="">Refunds</a></li>
+                    <li><a href="">Refunds</a></li>
 
-                <li><a href="">Checkout</a></li>
+                    <li><a href="">Checkout</a></li>
 
-                <li><a href="">Discount</a></li>
+                    <li><a href="">Discount</a></li>
 
-                <li><a href="">Terms & Conditions</a></li>
+                    <li><a href="">Terms & Conditions</a></li>
 
-                <li><a href=""> Policy</a></li>
+                    <li><a href=""> Policy</a></li>
 
-                <li><a href="">Special Products</a></li>
+                    <li><a href="">Special Products</a></li>
 
-                <li><a href="">Manufacturers</a></li>
+                    <li><a href="">Manufacturers</a></li>
 
-                <li><a href="">Our Stores</a></li>
-            </ul>
-            <div class="payment-block pt-3">
-                <img src="image/icon-logo/payment-icons.png" alt="">
-            </div>
-        </div>*@
+                    <li><a href="">Our Stores</a></li>
+                </ul>
+                <div class="payment-block pt-3">
+                    <img src="image/icon-logo/payment-icons.png" alt="">
+                </div>
+            </div>*@
 
     </div>
     <div class="footer-copyright">
