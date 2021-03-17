@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Localization;
@@ -104,6 +105,7 @@ namespace Nop.Web.Controllers
                 return RedirectToRoute("Homepage");
 
             var model = _newsModelFactory.PrepareNewsItemListModel(command);
+            model.NewsItems = model.NewsItems.Where(x => x.SeName != "gioi-thieu-cong-ty").ToList();
             //return View(model);
             return View("SumiList", model);
         }
