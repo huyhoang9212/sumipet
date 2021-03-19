@@ -75,6 +75,16 @@ namespace Nop.Web.Areas.Admin.Models.News
         [NopResourceDisplayName("Admin.ContentManagement.News.NewsItems.Fields.Published")]
         public bool Published { get; set; }
 
+        [UIHint("Picture")]
+        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.Picture")]
+        public int PictureId { get; set; }
+
+        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.ShowOnHomepage")]
+        public bool ShowOnHomepage { get; set; }
+
+        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.DisplayOrder")]
+        public int DisplayOrder { get; set; }
+
         public int ApprovedComments { get; set; }
 
         public int NotApprovedComments { get; set; }
