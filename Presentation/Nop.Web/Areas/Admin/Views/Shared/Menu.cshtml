@@ -32,6 +32,8 @@
 
         var isAdminPage = config.UseRedisToStoreDataProtectionKeys;
 
+
+        rootNode.ChildNodes = rootNode.ChildNodes.Where(x => !x.SystemName.Equals("Help")).ToList();
         //display menu items
         foreach (var item in rootNode.ChildNodes.Where(x => x.Visible))
         {
