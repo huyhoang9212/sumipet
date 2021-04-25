@@ -70,7 +70,7 @@ insert into  [dbo].[PermissionRecord_Role_Mapping](PermissionRecord_Id, Customer
 
 insert into  [dbo].[PermissionRecord_Role_Mapping](PermissionRecord_Id, CustomerRole_Id) values(23, 2)
 
-
+insert into  [dbo].[PermissionRecord_Role_Mapping](PermissionRecord_Id, CustomerRole_Id) values(44, 2)
 select top 100 * from [dbo].[Customer_CustomerRole_Mapping]
 
 
