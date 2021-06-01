@@ -29,6 +29,13 @@ namespace Nop.Web.Models.Catalog
 
         public bool UseAjaxMenu { get; set; }
 
+
+
+        public bool ShoppingCartEnabled { get; set; }
+        public int ShoppingCartItems { get; set; }
+
+        public string ShoppingCartSubTotal { get; set; }
+
         public bool HasOnlyCategories => Categories.Any()
                        && !Topics.Any()
                        && !DisplayHomepageMenuItem

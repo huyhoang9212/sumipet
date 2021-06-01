@@ -10,14 +10,16 @@ var AjaxCart = {
     topwishlistselector: '',
     flyoutcartselector: '',
     localized_data: false,
+    subTotalSectionSelector: '',
 
-    init: function (usepopupnotifications, topcartselector, topwishlistselector, flyoutcartselector, localized_data) {
+    init: function (usepopupnotifications, topcartselector, topwishlistselector, flyoutcartselector, localized_data, sub_TotalSectionSelector) {
         this.loadWaiting = false;
         this.usepopupnotifications = usepopupnotifications;
         this.topcartselector = topcartselector;
         this.topwishlistselector = topwishlistselector;
         this.flyoutcartselector = flyoutcartselector;
         this.localized_data = localized_data;
+        this.subTotalSectionSelector = sub_TotalSectionSelector;
     },
 
     setLoadWaiting: function (display) {
@@ -27,6 +29,7 @@ var AjaxCart = {
 
     //add a product to the cart/wishlist from the catalog pages
     addproducttocart_catalog: function (urladd) {
+        debugger
         if (this.loadWaiting !== false) {
             return;
         }
@@ -78,9 +81,15 @@ var AjaxCart = {
     },
 
     success_process: function (response) {
+        debugger
         if (response.updatetopcartsectionhtml) {
             $(AjaxCart.topcartselector).html(response.updatetopcartsectionhtml);
         }
+
+        if (response.subTotalSectionHtml) {
+            $(AjaxCart.subTotalSectionSelector).html(response.subTotalSectionHtml);
+        }
+
         if (response.updatetopwishlistsectionhtml) {
             $(AjaxCart.topwishlistselector).html(response.updatetopwishlistsectionhtml);
         }

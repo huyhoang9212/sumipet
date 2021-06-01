@@ -13,6 +13,7 @@ using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Security;
 using Nop.Core.Domain.Shipping;
+using Nop.Core.Domain.Tax;
 using Nop.Core.Html;
 using Nop.Core.Infrastructure;
 using Nop.Services.Caching;
@@ -79,6 +80,7 @@ namespace Nop.Web.Controllers
         private readonly MediaSettings _mediaSettings;
         private readonly OrderSettings _orderSettings;
         private readonly ShoppingCartSettings _shoppingCartSettings;
+        //private readonly IShoppingCartModelFactory _shoppingCartModelFactory;
 
         #endregion
 
@@ -676,19 +678,26 @@ namespace Nop.Web.Controllers
                         //display notification message and update appropriate blocks
                         var shoppingCarts = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
 
-                        var updatetopcartsectionhtml = string.Format(_localizationService.GetResource("ShoppingCart.HeaderQuantity"),
-                            shoppingCarts.Sum(item => item.Quantity));
+                        //var updatetopcartsectionhtml = string.Format(_localizationService.GetResource("ShoppingCart.HeaderQuantity"),
+                        //    shoppingCarts.Sum(item => item.Quantity));
+                        var updatetopcartsectionhtml = shoppingCarts.Sum(item => item.Quantity).ToString();
+
+                        //subtotal
+                        var subTotal = _shoppingCartModelFactory.PrepareSubTotalShoppingCartModel();
 
                         var updateflyoutcartsectionhtml = _shoppingCartSettings.MiniShoppingCartEnabled
                             ? RenderViewComponentToString("FlyoutShoppingCart")
                             : string.Empty;
+
+                        var subTotalSectionHtml = subTotal.SubTotal;
 
                         return Json(new
                         {
                             success = true,
                             message = string.Format(_localizationService.GetResource("Products.ProductHasBeenAddedToTheCart.Link"), Url.RouteUrl("ShoppingCart")),
                             updatetopcartsectionhtml,
-                            updateflyoutcartsectionhtml
+                            updateflyoutcartsectionhtml,
+                            subTotalSectionHtml
                         });
                     }
             }

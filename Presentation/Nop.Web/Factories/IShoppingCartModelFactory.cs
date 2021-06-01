@@ -42,6 +42,9 @@ namespace Nop.Web.Factories
             bool validateCheckoutAttributes = false,
             bool prepareAndDisplayOrderReviewData = false);
 
+
+        SubTotalShoppingCartModel PrepareSubTotalShoppingCartModel();
+
         /// <summary>
         /// Prepare the wishlist model
         /// </summary>

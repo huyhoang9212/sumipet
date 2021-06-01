@@ -46,4 +46,9 @@ namespace Nop.Web.Models.ShoppingCart
 
         #endregion
     }
+
+    public partial class SubTotalShoppingCartModel : BaseNopModel
+    {
+        public string SubTotal { get; set; }
+    }
 }

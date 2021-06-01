@@ -336,6 +336,7 @@ namespace Nop.Web.Factories
         /// <returns>Header links model</returns>
         public virtual HeaderLinksModel PrepareHeaderLinksModel()
         {
+            // OK
             var customer = _workContext.CurrentCustomer;
 
             var unreadMessageCount = GetUnreadPrivateMessages();

@@ -34,6 +34,10 @@ using Nop.Web.Framework.Events;
 using Nop.Web.Infrastructure.Cache;
 using Nop.Web.Models.Catalog;
 using Nop.Web.Models.Media;
+using Nop.Services.Security;
+using Nop.Services.Orders;
+using Nop.Core.Domain.Orders;
+using Nop.Core.Domain.Tax;
 
 namespace Nop.Web.Factories
 {
@@ -73,6 +77,13 @@ namespace Nop.Web.Factories
         private readonly IWorkContext _workContext;
         private readonly MediaSettings _mediaSettings;
         private readonly VendorSettings _vendorSettings;
+        private readonly IPermissionService _permissionService;
+        private readonly IShoppingCartService _shoppingCartService;
+
+        private readonly TaxSettings _taxSettings;
+        private readonly IOrderTotalCalculationService _orderTotalCalculationService;
+
+
 
         #endregion
 
@@ -109,7 +120,11 @@ namespace Nop.Web.Factories
             IWebHelper webHelper,
             IWorkContext workContext,
             MediaSettings mediaSettings,
-            VendorSettings vendorSettings)
+            VendorSettings vendorSettings,
+            IPermissionService permissionService,
+            IShoppingCartService shoppingCartService,
+            IOrderTotalCalculationService orderTotalCalculationService,
+            TaxSettings taxSettings)
         {
             _blogSettings = blogSettings;
             _catalogSettings = catalogSettings;
@@ -143,6 +158,10 @@ namespace Nop.Web.Factories
             _workContext = workContext;
             _mediaSettings = mediaSettings;
             _vendorSettings = vendorSettings;
+            _permissionService = permissionService;
+            _shoppingCartService = shoppingCartService;
+            _orderTotalCalculationService = orderTotalCalculationService;
+            _taxSettings = taxSettings;
         }
 
         #endregion
@@ -576,8 +595,30 @@ namespace Nop.Web.Factories
                 DisplayBlogMenuItem = _displayDefaultMenuItemSettings.DisplayBlogMenuItem,
                 DisplayForumsMenuItem = _displayDefaultMenuItemSettings.DisplayForumsMenuItem,
                 DisplayContactUsMenuItem = _displayDefaultMenuItemSettings.DisplayContactUsMenuItem,
-                UseAjaxMenu = _catalogSettings.UseAjaxLoadMenu
+                UseAjaxMenu = _catalogSettings.UseAjaxLoadMenu,
+                ShoppingCartEnabled = _permissionService.Authorize(StandardPermissionProvider.EnableShoppingCart),
+
             };
+
+            var customer = _workContext.CurrentCustomer;
+            //performance optimization (use "HasShoppingCartItems" property)
+            if (customer.HasShoppingCartItems)
+            {
+                model.ShoppingCartItems = _shoppingCartService.GetShoppingCart(customer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id)
+                    .Sum(item => item.Quantity);
+
+                var cart = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
+
+                if (cart.Any())
+                {
+                    //subtotal
+                    var subTotalIncludingTax = _workContext.TaxDisplayType == TaxDisplayType.IncludingTax && !_taxSettings.ForceTaxExclusionFromOrderSubtotal;
+                    _orderTotalCalculationService.GetShoppingCartSubTotal(cart, subTotalIncludingTax, out var _, out var _, out var subTotalWithoutDiscountBase, out var _);
+                    var subtotalBase = subTotalWithoutDiscountBase;
+                    var subtotal = _currencyService.ConvertFromPrimaryStoreCurrency(subtotalBase, _workContext.WorkingCurrency);
+                    model.ShoppingCartSubTotal = _priceFormatter.FormatPrice(subtotal, false, _workContext.WorkingCurrency, _workContext.WorkingLanguage.Id, subTotalIncludingTax);
+                }
+            }
 
             return model;
         }

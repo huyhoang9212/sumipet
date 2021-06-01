@@ -1,63 +1,85 @@
 ﻿@model IList<SumiHomePageProductViewModel>
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+@inject CatalogSettings catalogSettings
+@inject IWorkContext workContext
+@{
+    //prepare "Add to cart" AJAX link
+   // var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+
+    //addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+
+
+    //var addtowishlistlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = (int)ShoppingCartType.Wishlist, quantity = quantity });
+    //var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id });
+}
 <!-- Home 2 => Slider bLock 2 -->
 @foreach (var item in Model)
 {
-<div class="pt--50">
-    <div class="container">
+    <div class="pt--50">
+        <div class="container">
 
-        <div class="block-title-2">
-            <h2>@item.Category.Name</h2>
-        </div>
-        <div class="petmark-slick-slider petmark-slick-slider--wrapper-2 border grid-column-slider " data-slick-setting='{
+            <div class="block-title-2">
+                <h2>@item.Category.Name</h2>
+            </div>
+            <div class="petmark-slick-slider petmark-slick-slider--wrapper-2 border grid-column-slider " data-slick-setting='{
                 "autoplay": true,
                 "autoplaySpeed": 3000,
                 "slidesToShow": 5,
                 "rows" :2,
                 "arrows": true
             }'
-             data-slick-responsive='[
+                 data-slick-responsive='[
                 {"breakpoint":991, "settings": {"slidesToShow": 3} },
                 {"breakpoint":768, "settings": {"slidesToShow": 2} },
                 {"breakpoint":480, "settings": {"slidesToShow": 1,"rows" :1} }
             ]'>
 
-            @foreach (var product in item.Products)
-            {
-                <div class="single-slide">
-                    <div class="pm-product">
-                        <div class="image">
+                @foreach (var product in item.Products)
+                {
+                    var addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
 
-                            <a href="@Url.RouteUrl("Product", new { SeName = product.SeName})" title="@product.DefaultPictureModel.Title">
-                                <img src="@product.DefaultPictureModel.ImageUrl" alt="@product.DefaultPictureModel.AlternateText" title="@product.DefaultPictureModel.Title">
-                            </a>
-                            @if (!string.IsNullOrEmpty(product.ProductPrice.OldPrice))
-                            {
-                                <span class="onsale-badge">Sale!</span>
-                            }
-                        </div>
-                        <div class="content">
-                            <h3>@product.Name</h3>
-                            <div class="price text-orange">
+                    <div class="single-slide">
+                        <div class="pm-product">
+                            <div class="image">
+
+                                <a href="@Url.RouteUrl("Product", new { SeName = product.SeName})" title="@product.DefaultPictureModel.Title">
+                                    <img src="@product.DefaultPictureModel.ImageUrl" alt="@product.DefaultPictureModel.AlternateText" title="@product.DefaultPictureModel.Title">
+                                </a>
                                 @if (!string.IsNullOrEmpty(product.ProductPrice.OldPrice))
                                 {
-                                    <span class="old">@product.ProductPrice.OldPrice</span>
+                                    <span class="onsale-badge">Sale!</span>
                                 }
-
-                                <span>@product.ProductPrice.Price</span>
                             </div>
-                            <div class="btn-block">
-                                <a href="#" class="btn btn-outlined btn-rounded">Chọn mua</a>
+                            <div class="content">
+                                <h3>@product.Name</h3>
+                                <div class="price text-orange">
+                                    @if (!string.IsNullOrEmpty(product.ProductPrice.OldPrice))
+                                    {
+                                        <span class="old">@product.ProductPrice.OldPrice</span>
+                                    }
+
+                                    <span>@product.ProductPrice.Price</span>
+                                </div>
+                                <div class="btn-block">
+                                    @*<input type="button" value="@(addToCartText)" class="button-2 product-box-add-to-cart-button" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />*@
+
+                                    <input type="button" class="btn btn-outlined btn-rounded" value="Chọn mua" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
 
 
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 }
 
 
