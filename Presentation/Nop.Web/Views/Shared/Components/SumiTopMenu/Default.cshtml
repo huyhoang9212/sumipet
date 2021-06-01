@@ -73,7 +73,7 @@
                                 </span>
                             </div>
                             <div class="cart-text text-white">
-                                <span class="d-block">Giỏ hàng</span>
+                                <span class="d-block" onclick="setLocation('@(Url.RouteUrl("ShoppingCart"))')">Giỏ hàng</span>
                                 @*<strong><span class="amount"><span class="currencySymbol">$</span>40.00</span></strong>*@
                                 <strong><span class="amount subTotalSectionHtml">@Model.ShoppingCartSubTotal</span></strong>
                             </div>
