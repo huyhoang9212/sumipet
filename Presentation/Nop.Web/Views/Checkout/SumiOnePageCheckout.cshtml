@@ -1,0 +1,159 @@
+﻿@model OnePageCheckoutModel
+@using Nop.Core
+@inject IWebHelper webHelper
+@{
+    //Layout = "_ColumnsOne";
+
+    //scripts
+    Html.AddScriptParts(ResourceLocation.Footer, "~/js/public.accordion.js");
+    Html.AddScriptParts(ResourceLocation.Footer, "~/js/public.onepagecheckout.js");
+
+    var storeLocation = webHelper.GetStoreLocation();
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Checkout").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-checkout-page");
+}
+@{
+    //step numbers
+    var billingAddressStepNumber = 1;
+    var shippingAddressStepNumber = 2;
+    var shippingMethodStepNumber = 3;
+    var paymentMethodStepNumber = 4;
+    var paymentInfoStepNumber = 5;
+    var confirmOrderStepNumber = 6;
+    if (!Model.ShippingRequired)
+    {
+        paymentMethodStepNumber = paymentMethodStepNumber - 2;
+        paymentInfoStepNumber = paymentInfoStepNumber - 2;
+        confirmOrderStepNumber = confirmOrderStepNumber - 2;
+    }
+    if (Model.DisableBillingAddressCheckoutStep)
+    {
+        shippingAddressStepNumber--;
+        shippingMethodStepNumber--;
+        paymentMethodStepNumber--;
+        paymentInfoStepNumber--;
+        confirmOrderStepNumber--;
+    }
+}
+
+
+
+<main id="content" class="page-section sp-inner-page checkout-area-padding space-db--20">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <!-- Checkout Form s-->
+                <div class="checkout-form">
+                    <div class="row row-40">
+                        <div class="col-12">
+
+
+                        </div>
+                        <div class="col-lg-7 mb--20">
+
+                            <form id="co-billing-form" action="">
+                                <div id="checkout-billing-load">
+                                    @*@await Html.PartialAsync("OpcBillingAddress", Model.BillingAddress)*@
+                                    @await Html.PartialAsync("_SumiCreateOrUpdateAddress", Model.BillingAddress.BillingNewAddress)
+
+                                    @*billing address content will be loaded here*@
+
+
+
+                                </div>
+                            </form>
+                            <script asp-location="Footer">
+                                Billing.init('#co-billing-form', '@(storeLocation)checkout/OpcSaveBilling/',
+                                        @(Model.DisableBillingAddressCheckoutStep.ToString().ToLowerInvariant()));
+                                    if ($("#billing-address-select").length > 0) {
+                                        Billing.newAddress(!$('#billing-address-select').val());
+                                    }
+                            </script>
+                            <div class="buttons" id="billing-buttons-container">
+                                <input type="button" title="Cập nhật địa chỉ"
+                                       class="place-order w-100" onclick="Billing.save()" value="Cập nhật địa chỉ" />
+
+                                <span class="please-wait" id="billing-please-wait" style="display: none;">@T("Checkout.UpdateAddress")</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="row">
+
+                                <!-- Cart Total -->
+                                <div class="col-12">
+                                    <div class="checkout-cart-total">
+                                        <h2 class="checkout-title">ĐƠN HÀNG</h2>
+                                        <h4>Sản phẩm <span>Giá tiền</span></h4>
+
+
+                                        <ul>
+                                            @foreach (var item in Model.CheckoutConfirmModel.ShoppingCartModel.Items)
+                                            {
+                                                <li><span class="left">@item.ProductName</span> <span class="right product-unit-price">@item.UnitPrice</span></li>
+                                            }
+                                        </ul>
+
+
+                                        @*<ul>
+                                                <li><span class="left">Cillum dolore tortor nisl X 01</span> <span class="right">$25.00</span></li>
+                                                <li><span class="left">Auctor gravida pellentesque X 02 </span><span class="right">$50.00</span></li>
+                                                <li><span class="left">Condimentum posuere consectetur X 01</span> <span class="right">$29.00</span></li>
+                                                <li><span class="left">Habitasse dictumst elementum X 01</span> <span class="right">$10.00</span></li>
+                                            </ul>*@
+
+                                        <p>
+                                            @T("ShoppingCart.Totals.SubTotal")   <span class="product-subtotal text-primary">
+                                                @Model.CheckoutConfirmModel.OrderTotalmodel.SubTotal
+                                            </span>
+                                        </p>
+                                        <p>@T("shoppingcart.totals.subtotaldiscount") <span>0</span></p>
+
+                                        <h4>
+                                            @T("ShoppingCart.Totals.OrderTotal"):
+                                        <span class="text-primary">@Model.CheckoutConfirmModel.OrderTotalmodel.OrderTotal</span>
+                                    </h4>
+
+
+
+
+                                    <br />
+
+
+
+                                    <div id="checkout-step-confirm-order" class="step a-item">
+                                        <div id="checkout-confirm-order-load">
+                                            @*confirm order content will be loaded here*@
+                                        </div>
+                                        <script asp-location="Footer">
+                                                 ConfirmOrder.init('@(storeLocation)checkout/OpcConfirmOrder/', '@(storeLocation)checkout/completed/');
+                                        </script>
+                                        <div class="buttons" id="confirm-order-buttons-container">
+                                            <input type="button" class="place-order w-100" onclick="ConfirmOrder.save()"
+                                                   value="@T("Common.Order")" />
+                                            <span class="please-wait" id="confirm-order-please-wait"
+                                                  style="display: none;">@T("Checkout.SubmittingOrder")</span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</main>
+

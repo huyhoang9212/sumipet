@@ -1112,7 +1112,7 @@ namespace Nop.Services.Orders
             }
 
             if (!shippingTotal.HasValue)
-                return null;
+                return 0;
 
             if (shippingTotal.Value < decimal.Zero)
                 shippingTotal = decimal.Zero;

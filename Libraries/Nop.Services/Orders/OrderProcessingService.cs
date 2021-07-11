@@ -433,8 +433,8 @@ namespace Nop.Services.Orders
 
             var billingAddress = _customerService.GetCustomerBillingAddress(details.Customer);
 
-            if (!CommonHelper.IsValidEmail(billingAddress?.Email))
-                throw new NopException("Email is not valid");
+            //if (!CommonHelper.IsValidEmail(billingAddress?.Email))
+            //    throw new NopException("Email is not valid");
 
             details.BillingAddress = _addressService.CloneAddress(billingAddress);
 
@@ -560,11 +560,11 @@ namespace Nop.Services.Orders
             //shipping total
             var orderShippingTotalInclTax = _orderTotalCalculationService.GetShoppingCartShippingTotal(details.Cart, true, out var _, out var shippingTotalDiscounts);
             var orderShippingTotalExclTax = _orderTotalCalculationService.GetShoppingCartShippingTotal(details.Cart, false);
-            if (!orderShippingTotalInclTax.HasValue || !orderShippingTotalExclTax.HasValue)
-                throw new NopException("Shipping total couldn't be calculated");
+            //if (!orderShippingTotalInclTax.HasValue || !orderShippingTotalExclTax.HasValue)
+            //    throw new NopException("Shipping total couldn't be calculated");
 
-            details.OrderShippingTotalInclTax = orderShippingTotalInclTax.Value;
-            details.OrderShippingTotalExclTax = orderShippingTotalExclTax.Value;
+            details.OrderShippingTotalInclTax = orderShippingTotalInclTax.HasValue ? orderShippingTotalInclTax.Value : 0;
+            details.OrderShippingTotalExclTax = orderShippingTotalExclTax.HasValue ? orderShippingTotalExclTax.Value : 0;
 
             foreach (var disc in shippingTotalDiscounts)
                 if (!_discountService.ContainsDiscount(details.AppliedDiscounts, disc))
@@ -1394,6 +1394,8 @@ namespace Nop.Services.Orders
             ProcessPaymentResult processPaymentResult;
             //skip payment workflow if order total equals zero
             var skipPaymentWorkflow = details.OrderTotal == decimal.Zero;
+            skipPaymentWorkflow = true;
+
             if (!skipPaymentWorkflow)
             {
                 var customer = _customerService.GetCustomerById(processPaymentRequest.CustomerId);
@@ -1426,7 +1428,7 @@ namespace Nop.Services.Orders
             }
             else
                 //payment is not required
-                processPaymentResult = new ProcessPaymentResult { NewPaymentStatus = PaymentStatus.Paid };
+                processPaymentResult = new ProcessPaymentResult { NewPaymentStatus = PaymentStatus.Pending };
             return processPaymentResult;
         }
 

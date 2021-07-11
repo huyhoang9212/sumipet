@@ -1,0 +1,132 @@
+﻿@model AddressModel
+
+<div class="section new-billing-address" id="billing-new-address-form">
+    <h4 class="checkout-title">@T("Checkout.ShippingAddress")</h4>
+    <div class="row">
+
+        <div class="col-md-6 col-12">
+            @*<label>First Name*</label>
+            <input type="text" placeholder="First Name" required>*@
+
+            <label asp-for="FirstName" asp-postfix=":"></label>
+            <input asp-for="FirstName" />
+            @*<nop-required />*@
+            <span asp-validation-for="FirstName"></span>
+        </div>
+
+        <div class="col-md-6 col-12">
+            @*<label>Last Name*</label>
+            <input type="text" placeholder="Last Name">*@
+
+            <label asp-for="LastName" asp-postfix=":"></label>
+            <input asp-for="LastName" />
+            <nop-required />
+            <span asp-validation-for="LastName"></span>
+        </div>
+
+        @if (Model.CompanyEnabled)
+        {
+            <div class="col-md-6 col-12">
+                <label asp-for="Company" asp-postfix=":"></label>
+                <input asp-for="Company" />
+
+                <span asp-validation-for="Company"></span>
+            </div>
+        }
+
+        @if (Model.PhoneEnabled)
+        {
+            @*<div class="inputs">
+                <label asp-for="PhoneNumber" asp-postfix=":"></label>
+                <input asp-for="PhoneNumber" />
+                @if (Model.PhoneRequired)
+                {
+                    <nop-required />
+                }
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>*@
+
+            <div class="col-md-6 col-12">
+                <label asp-for="PhoneNumber" asp-postfix=":"></label>
+                <input asp-for="PhoneNumber" />
+
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+        }
+
+
+        @if (Model.StreetAddressEnabled)
+        {
+            @*<div class="inputs">
+                <label asp-for="Address1" asp-postfix=":"></label>
+                <input asp-for="Address1" />
+                @if (Model.StreetAddressRequired)
+                {
+                    <nop-required />
+                }
+                <span asp-validation-for="Address1"></span>
+            </div>*@
+
+            <div class="col-12">
+                <label asp-for="Address1" asp-postfix=":"></label>
+                <input asp-for="Address1" />
+                <span asp-validation-for="Address1"></span>
+            </div>
+
+        }
+
+        @if (Model.StreetAddress2Enabled)
+        {
+            <div class="col-12">
+                <label asp-for="Address2" asp-postfix=":"></label>
+                <input asp-for="Address2" />
+                @if (Model.StreetAddress2Required)
+                {
+                    <nop-required />
+                }
+                <span asp-validation-for="Address2"></span>
+            </div>
+
+        }
+
+        @if (Model.CityEnabled)
+        {
+            <div class="col-md-6 col-12">
+                <label asp-for="City" asp-postfix=":"></label>
+                <input asp-for="City" />
+                <span asp-validation-for="City"></span>
+            </div>
+        }
+
+        @*<div class="col-md-6 col-12 mb--20">
+            <label>Town/City*</label>
+            <input type="text" placeholder="Town/City">
+        </div>
+
+        <div class="col-md-6 col-12 mb--20">
+            <label>State*</label>
+            <input type="text" placeholder="State">
+        </div>
+
+        <div class="col-md-6 col-12 mb--20">
+            <label>Zip Code*</label>
+            <input type="text" placeholder="Zip Code">
+        </div>*@
+
+     
+        @*<div class="col-12 mb--20 ">
+            <div class="block-border check-bx-wrapper">
+                <div class="check-box">
+                    <input type="checkbox" id="create_account">
+                    <label for="create_account">Create an Acount?</label>
+                </div>
+                <div class="check-box">
+                    <input type="checkbox" id="shiping_address" data-shipping>
+                    <label for="shiping_address">Ship to Different Address</label>
+                </div>
+            </div>
+        </div>*@
+
+    </div>
+
+</div>

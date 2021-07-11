@@ -1,0 +1,24 @@
+﻿@model OrderTotalsModel
+
+
+<div class="cart-summary-wrap">
+    <h4><span>Cart Summary</span></h4>
+    <p>@T("ShoppingCart.Totals.SubTotal"): <span class="text-primary">@Model.SubTotal</span></p>
+    <p>
+        @*@T("ShoppingCart.Totals.Shipping"):
+
+            @if (!string.IsNullOrEmpty(Model.Shipping))
+            {
+                <span class="text-primary">@Model.Shipping</span>
+            }
+            else
+            {
+                <span>@T("ShoppingCart.Totals.CalculatedDuringCheckout")</span>
+            }*@
+
+    @T("shoppingcart.totals.subtotaldiscount") <span>0</span>
+
+
+    </p>
+    <h2>@T("ShoppingCart.Totals.OrderTotal"): <span class="text-primary">@Model.OrderTotal</span></h2>
+</div>

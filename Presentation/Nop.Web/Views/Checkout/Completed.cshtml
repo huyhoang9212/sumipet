@@ -1,6 +1,6 @@
 ﻿@model CheckoutCompletedModel
 @{
-    Layout = "_ColumnsOne";
+    //Layout = "_ColumnsOne";
 
     //title
     Html.AddTitleParts(T("PageTitle.Checkout").Text);
@@ -8,32 +8,72 @@
     Html.AppendPageCssClassParts("html-checkout-page");
     Html.AppendPageCssClassParts("html-order-completed-page");
 }
-<div class="page checkout-page order-completed-page">
-    @if (!Model.OnePageCheckoutEnabled)
-    {
-        @await Component.InvokeAsync("CheckoutProgress",  new { step = CheckoutProgressStep.Complete })
-    }
-    <div class="page-title">
-        <h1>@T("Checkout.ThankYou")</h1>
-    </div>
-    <div class="page-body checkout-data">
-        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedTop, additionalData = Model })
-        <div class="section order-completed">
-            <div class="title">
-                <strong>@T("Checkout.YourOrderHasBeenSuccessfullyProcessed")</strong>
-            </div>
-            <div class="details">
-                <div class="order-number">
-                    <strong>@T("Checkout.OrderNumber"): @Model.CustomOrderNumber</strong>
+
+
+<main id="content" class="page-section sp-inner-page checkout-area-padding space-db--20">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="page-title">
+                    <h1>@T("Checkout.ThankYou")</h1>
                 </div>
-                <div class="details-link">
-                    <a href="@Url.RouteUrl("OrderDetails", new { orderID = Model.OrderId })">@T("Checkout.PlacedOrderDetails")</a>
+
+                <div class="page-body checkout-data">
+                    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedTop, additionalData = Model })
+                    <div class="section order-completed">
+                        <div class="title">
+                            <strong>@T("Checkout.YourOrderHasBeenSuccessfullyProcessed")</strong>
+                        </div>
+                        @*<div class="details">
+                            <div class="order-number">
+                                <strong>@T("Checkout.OrderNumber"): @Model.CustomOrderNumber</strong>
+                            </div>
+                            <div class="details-link">
+                                <a href="@Url.RouteUrl("OrderDetails", new { orderID = Model.OrderId })">@T("Checkout.PlacedOrderDetails")</a>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <input type="button" value="@T("Checkout.ThankYou.Continue")" class="button-1 order-completed-continue-button" onclick="setLocation('@Url.RouteUrl("Homepage")')" />
+                        </div>*@
+                    </div>
+
+                    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedBottom, additionalData = Model })
+
                 </div>
-            </div>
-            <div class="buttons">
-                <input type="button" value="@T("Checkout.ThankYou.Continue")" class="button-1 order-completed-continue-button" onclick="setLocation('@Url.RouteUrl("Homepage")')" />
+
             </div>
         </div>
-        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedBottom, additionalData = Model })
     </div>
-</div>
+</main>
+
+
+@*<div class="page checkout-page order-completed-page">
+        @if (!Model.OnePageCheckoutEnabled)
+        {
+            @await Component.InvokeAsync("CheckoutProgress",  new { step = CheckoutProgressStep.Complete })
+        }
+        <div class="page-title">
+            <h1>@T("Checkout.ThankYou")</h1>
+        </div>
+        <div class="page-body checkout-data">
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedTop, additionalData = Model })
+            <div class="section order-completed">
+                <div class="title">
+                    <strong>@T("Checkout.YourOrderHasBeenSuccessfullyProcessed")</strong>
+                </div>
+                <div class="details">
+                    <div class="order-number">
+                        <strong>@T("Checkout.OrderNumber"): @Model.CustomOrderNumber</strong>
+                    </div>
+                    <div class="details-link">
+                        <a href="@Url.RouteUrl("OrderDetails", new { orderID = Model.OrderId })">@T("Checkout.PlacedOrderDetails")</a>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <input type="button" value="@T("Checkout.ThankYou.Continue")" class="button-1 order-completed-continue-button" onclick="setLocation('@Url.RouteUrl("Homepage")')" />
+                </div>
+            </div>
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedBottom, additionalData = Model })
+        </div>
+    </div>*@

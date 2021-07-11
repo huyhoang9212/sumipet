@@ -24,6 +24,7 @@ using Nop.Web.Factories;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Models.Checkout;
+using Nop.Web.Models.ShoppingCart;
 
 namespace Nop.Web.Controllers
 {
@@ -57,6 +58,7 @@ namespace Nop.Web.Controllers
         private readonly PaymentSettings _paymentSettings;
         private readonly RewardPointsSettings _rewardPointsSettings;
         private readonly ShippingSettings _shippingSettings;
+        private readonly IShoppingCartModelFactory _shoppingCartModelFactory;
 
         #endregion
 
@@ -85,7 +87,8 @@ namespace Nop.Web.Controllers
             OrderSettings orderSettings,
             PaymentSettings paymentSettings,
             RewardPointsSettings rewardPointsSettings,
-            ShippingSettings shippingSettings)
+            ShippingSettings shippingSettings,
+            IShoppingCartModelFactory shoppingCartModelFactory)
         {
             _addressSettings = addressSettings;
             _customerSettings = customerSettings;
@@ -111,6 +114,7 @@ namespace Nop.Web.Controllers
             _paymentSettings = paymentSettings;
             _rewardPointsSettings = rewardPointsSettings;
             _shippingSettings = shippingSettings;
+            _shoppingCartModelFactory = shoppingCartModelFactory;
         }
 
         #endregion
@@ -1159,8 +1163,23 @@ namespace Nop.Web.Controllers
             if (_customerService.IsGuest(_workContext.CurrentCustomer) && !_orderSettings.AnonymousCheckoutAllowed)
                 return Challenge();
 
+
+            var cartmodel = new ShoppingCartModel();
+            cartmodel = _shoppingCartModelFactory.PrepareShoppingCartModel(cartmodel, cart,
+                isEditable: false,
+                prepareAndDisplayOrderReviewData: true);
+
             var model = _checkoutModelFactory.PrepareOnePageCheckoutModel(cart);
-            return View(model);
+
+            var confirmOrderModel = _checkoutModelFactory.PrepareConfirmOrderModel(cart);
+
+            confirmOrderModel.ShoppingCartModel = cartmodel;
+
+            var orderTotalmodel = _shoppingCartModelFactory.PrepareOrderTotalsModel(cart, false);
+            confirmOrderModel.OrderTotalmodel = orderTotalmodel;
+            model.CheckoutConfirmModel = confirmOrderModel;
+
+            return View("SumiOnePageCheckout", model);
         }
 
         [IgnoreAntiforgeryToken]
@@ -1199,7 +1218,47 @@ namespace Nop.Web.Controllers
                     //new address
                     var newAddress = model.BillingNewAddress;
 
-                    //custom address attributes
+                    var firstName = form["Firstname"];
+                    var lastName = form["LastName"];
+                    var company = form["Company"];
+                    var phoneNumber = form["PhoneNumber"];
+                    var address1 = form["Address1"];
+                    var address2 = form["Address2"];
+                    var city = form["City"];
+
+                    if (!string.IsNullOrEmpty(firstName))
+                    {
+                        newAddress.FirstName = firstName.ToString();
+                    }
+
+                    if (!string.IsNullOrEmpty(lastName))
+                    {
+                        newAddress.LastName = lastName.ToString();
+                    }
+                    if (!string.IsNullOrEmpty(phoneNumber))
+                    {
+                        newAddress.PhoneNumber = phoneNumber.ToString();
+                    }
+                    if (!string.IsNullOrEmpty(address1))
+                    {
+                        newAddress.Address1 = address1.ToString();
+                    }
+                    if (!string.IsNullOrEmpty(address2))
+                    {
+                        newAddress.Address2 = address2.ToString();
+                    }
+                    if (!string.IsNullOrEmpty(city))
+                    {
+                        newAddress.City = city.ToString();
+                    }
+                    if (!string.IsNullOrEmpty(company))
+                    {
+                        newAddress.Company = company.ToString();
+                    }
+
+                    newAddress.Email = _workContext.CurrentCustomer.Email;
+
+                    ///custom address attributes
                     var customAttributes = _addressAttributeParser.ParseCustomAddressAttributes(form);
                     var customAttributeWarnings = _addressAttributeParser.GetAttributeWarnings(customAttributes);
                     foreach (var error in customAttributeWarnings)
@@ -1208,23 +1267,23 @@ namespace Nop.Web.Controllers
                     }
 
                     //validate model
-                    if (!ModelState.IsValid)
-                    {
-                        //model is not valid. redisplay the form with errors
-                        var billingAddressModel = _checkoutModelFactory.PrepareBillingAddressModel(cart,
-                            selectedCountryId: newAddress.CountryId,
-                            overrideAttributesXml: customAttributes);
-                        billingAddressModel.NewAddressPreselected = true;
-                        return Json(new
-                        {
-                            update_section = new UpdateSectionJsonModel
-                            {
-                                name = "billing",
-                                html = RenderPartialViewToString("OpcBillingAddress", billingAddressModel)
-                            },
-                            wrong_billing_address = true,
-                        });
-                    }
+                    //if (!ModelState.IsValid)
+                    //{
+                    //    //model is not valid. redisplay the form with errors
+                    //    var billingAddressModel = _checkoutModelFactory.PrepareBillingAddressModel(cart,
+                    //        selectedCountryId: newAddress.CountryId,
+                    //        overrideAttributesXml: customAttributes);
+                    //    billingAddressModel.NewAddressPreselected = true;
+                    //    return Json(new
+                    //    {
+                    //        update_section = new UpdateSectionJsonModel
+                    //        {
+                    //            name = "billing",
+                    //            html = RenderPartialViewToString("OpcBillingAddress", billingAddressModel)
+                    //        },
+                    //        wrong_billing_address = true,
+                    //    });
+                    //}
 
                     //try to find an address with the same values (don't duplicate records)
                     var address = _addressService.FindAddress(_customerService.GetAddressesByCustomerId(_workContext.CurrentCustomer.Id).ToList(),
@@ -1238,7 +1297,7 @@ namespace Nop.Web.Controllers
                     {
                         //address is not found. let's create a new one
                         address = newAddress.ToEntity();
-                        address.CustomAttributes = customAttributes;
+                        //address.CustomAttributes = customAttributes;
                         address.CreatedOnUtc = DateTime.UtcNow;
 
                         //some validation
@@ -1264,7 +1323,9 @@ namespace Nop.Web.Controllers
                     var address = _customerService.GetCustomerBillingAddress(_workContext.CurrentCustomer);
 
                     //by default Shipping is available if the country is not specified
+                    model.ShipToSameAddress = true;
                     var shippingAllowed = _addressSettings.CountryEnabled ? _countryService.GetCountryByAddress(address)?.AllowsShipping ?? false : true;
+                    shippingAllowed = true;
                     if (_shippingSettings.ShipToSameAddress && model.ShipToSameAddress && shippingAllowed)
                     {
                         //ship to the same address
@@ -1280,15 +1341,26 @@ namespace Nop.Web.Controllers
                     //do not ship to the same address
                     var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true);
 
+                    //return Json(new
+                    //{
+                    //    update_section = new UpdateSectionJsonModel
+                    //    {
+                    //        name = "shipping",
+                    //        html = RenderPartialViewToString("OpcShippingAddress", shippingAddressModel)
+                    //    },
+                    //    goto_section = "shipping"
+                    //});
                     return Json(new
                     {
                         update_section = new UpdateSectionJsonModel
                         {
-                            name = "shipping",
-                            html = RenderPartialViewToString("OpcShippingAddress", shippingAddressModel)
+                            name = "confirm-order",
+                            html = RenderPartialViewToString("OpcConfirmOrder", null)
                         },
-                        goto_section = "shipping"
+                        goto_section = "confirm_order"
                     });
+
+                    
                 }
 
                 //shipping is not required
@@ -1641,7 +1713,7 @@ namespace Nop.Web.Controllers
         }
 
         [IgnoreAntiforgeryToken]
-        public virtual IActionResult OpcConfirmOrder()
+        public virtual IActionResult OpcConfirmOrder(IFormCollection form)
         {
             try
             {
@@ -1669,10 +1741,10 @@ namespace Nop.Web.Controllers
                 if (processPaymentRequest == null)
                 {
                     //Check whether payment workflow is required
-                    if (_orderProcessingService.IsPaymentWorkflowRequired(cart))
-                    {
-                        throw new Exception("Payment information is not entered");
-                    }
+                    //if (_orderProcessingService.IsPaymentWorkflowRequired(cart))
+                    //{
+                    //    throw new Exception("Payment information is not entered");
+                    //}
 
                     processPaymentRequest = new ProcessPaymentRequest();
                 }

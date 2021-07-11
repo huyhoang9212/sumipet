@@ -1151,7 +1151,8 @@ namespace Nop.Web.Controllers
             var cart = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
             var model = new ShoppingCartModel();
             model = _shoppingCartModelFactory.PrepareShoppingCartModel(model, cart);
-            return View(model);
+            //return View(model);
+            return View("SumiCart", model);
         }
 
         [HttpPost, ActionName("Cart")]
@@ -1219,7 +1220,7 @@ namespace Nop.Web.Controllers
                     itemModel.Warnings = warningItem.Warnings.Concat(itemModel.Warnings).Distinct().ToList();
             }
 
-            return View(model);
+            return View("SumiCart", model);
         }
 
         [HttpPost, ActionName("Cart")]

@@ -135,6 +135,7 @@ var Billing = {
         $(document).trigger({ type: "onepagecheckout_billing_address_reset" });
     },
 
+    // save billing address
     save: function () {
         if (Checkout.loadWaiting !== false) return;
 
@@ -145,7 +146,7 @@ var Billing = {
             url: this.saveUrl,
             data: $(this.form).serialize(),
             type: "POST",
-            success: this.nextStep,
+            success: this.resetLoadWaiting,
             complete: this.resetLoadWaiting,
             error: Checkout.ajaxFailure
         });
@@ -181,13 +182,13 @@ var Billing = {
         }
 
         Checkout.setStepResponse(response);
-        Billing.initializeCountrySelect();
+        //Billing.initializeCountrySelect();
     },
 
     initializeCountrySelect: function () {
-        if ($('#opc-billing').has('select[data-trigger="country-select"]')) {
-            $('#opc-billing select[data-trigger="country-select"]').countrySelect();
-        }
+        //if ($('#opc-billing').has('select[data-trigger="country-select"]')) {
+        //    $('#opc-billing select[data-trigger="country-select"]').countrySelect();
+        //}
     }
 };
 
