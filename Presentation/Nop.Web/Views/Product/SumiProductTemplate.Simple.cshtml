@@ -1,5 +1,7 @@
 ﻿@model ProductDetailsModel
 @using Nop.Core.Domain.Seo;
+@using Nop.Core.Domain.Orders
+
 @inject Nop.Core.IWebHelper webHelper
 @inject SeoSettings seoSettings
 @{
@@ -42,6 +44,13 @@
         Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
         Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
     }
+
+    var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+ 
+    addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+
 }
 <!--product breadcrumb-->
 @section Breadcrumb
@@ -195,23 +204,6 @@
                                 </a>
                             }
 
-
-                            <!-- Slick Single -->
-                            @*<a href="#" class="gallary-item" data-image="image/product/product-details/product-details-2.jpg"
-                                   data-zoom-image="image/product/product-details/product-details-2.jpg">
-                                    <img src="image/product/product-details/product-details-2.jpg" alt="" />
-                                </a>*@
-                            <!-- Slick Single -->
-                            @*<a href="#" class="gallary-item" data-image="image/product/product-details/product-details-3.jpg"
-                                   data-zoom-image="image/product/product-details/product-details-3.jpg">
-                                    <img src="image/product/product-details/product-details-3.jpg" alt="" />
-                                </a>*@
-                            <!-- Slick Single -->
-                            @*<a href="#" class="gallary-item" data-image="image/product/product-details/product-details-4.jpg"
-                                   data-zoom-image="image/product/product-details/product-details-4.jpg">
-                                    <img src="image/product/product-details/product-details-4.jpg" alt="" />
-                                </a>*@
-
                         </div>
                     </div>
                 </div>
@@ -219,10 +211,7 @@
                     <div class="description-block">
                         <div class="header-block">
                             <h3>@Model.Name</h3>
-                            @*<div class="navigation">
-                                    <a href="#"><i class="ion-ios-arrow-back"></i></a>
-                                    <a href="#"><i class="ion-ios-arrow-forward"></i></a>
-                                </div>*@
+
                         </div>
                         <!-- Rating Block -->
                         <div class="rating-block d-flex  mt--10 mb--15">
@@ -265,7 +254,9 @@
                                 <input type="number" class="form-control text-center" value="1">
                             </div>
                             <div class="btn-block">
-                                <a href="#" class="btn btn-rounded btn-outlined--primary">Thêm vào giỏ hàng</a>
+                                @*<a href="#" class="btn btn-rounded btn-outlined--primary">Thêm vào giỏ hàng</a>*@
+                                <input type="button" class="btn btn-rounded btn-outlined--primary" value="Thêm vào giỏ hàng" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />
+
                             </div>
                         </form>
                         <!-- Wishlist And Compare -->
@@ -407,7 +398,7 @@
         </div>
     </section>
 
-   
+
 
     @await Component.InvokeAsync("SumiRelatedProducts", new { productId = Model.Id })
 

@@ -144,7 +144,10 @@
             <span>@Model.ProductPrice.Price</span>
         </div>
         <div class="btn-block grid-btn">
-            <a href="#" class="btn btn-outlined btn-rounded btn-mid">Chọn mua</a>
+            @*<a href="#" class="btn btn-outlined btn-rounded btn-mid">Chọn mua</a>*@
+            <input type="button" class="btn btn-outlined btn-rounded" value="Thêm vào giỏ hàng" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />
+
+
         </div>
         <div class="card-list-content ">
             <div class="rating-widget mt--20">
@@ -161,12 +164,13 @@
                 </p>
             </article>
             <div class="btn-block d-flex">
-                <a href="#" class="btn btn-outlined btn-rounded btn-mid">Chọn mua</a>
+                @*<a href="#" class="btn btn-outlined btn-rounded btn-mid">Chọn mua</a>*@
+                <input type="button" class="btn btn-outlined btn-rounded" value="Chọn mua 3" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />
 
                 @*<div class="btn-options">
-                        <a href="wishlist.html"><i class="ion-ios-heart-outline"></i>Add to Wishlist</a>
-                        <a href="compare.html"><i class="ion-ios-shuffle"></i>Add to Compare</a>
-                    </div>*@
+            <a href="wishlist.html"><i class="ion-ios-heart-outline"></i>Add to Wishlist</a>
+            <a href="compare.html"><i class="ion-ios-shuffle"></i>Add to Compare</a>
+        </div>*@
 
             </div>
         </div>
